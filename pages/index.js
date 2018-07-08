@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import HomeContainer from '../containers/home';
 import AppLayout from '../containers/app-layout';
+import HomeContainer from '../containers/home';
 
 const HomePage = () => (
   <div>

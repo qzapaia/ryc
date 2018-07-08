@@ -4,6 +4,7 @@ import Router from 'next/router'
 import barrios from './barrios';
 import store from 'store2';
 import Link from 'next/link'
+import HomeSearchSection from "../../components/home-search-section"
 
 const LAST_ADDRESS = 'last-address';
 const LAST_NEIGHBORHOOD = 'last-neighborhood';
@@ -69,6 +70,9 @@ class Container extends PureComponent {
   render() {
     return (
       <div>
+        <HomeSearchSection>
+          
+        </HomeSearchSection>
         <h1>Buscar comidas:</h1>
         <form onSubmit={this.onSubmitAddress}>
           <div>  

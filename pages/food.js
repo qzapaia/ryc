@@ -1,8 +1,16 @@
-import React from 'react';
+import Head from 'next/head'
+import AppLayout from '../containers/app-layout';
 import FoodsContainer from "../containers/foods/withData";
 
 const FoodPage = ({ near}) => (
-  <FoodsContainer near={near} />
+  <div>
+    <Head>
+      <title>Comidas cerca tuyo - Rico y casero</title>  
+    </Head>
+    <AppLayout>
+      <FoodsContainer near={near} />
+    </AppLayout>
+  </div>
 );
 
 FoodPage.getInitialProps = (a,b,c) => {

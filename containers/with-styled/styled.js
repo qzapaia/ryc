@@ -5,7 +5,7 @@ injectGlobal`
     box-sizing:border-box;
   }
 
-  body {
+  body, input, button {
     font-family: "KometPro-Regular", Arial;
     margin: 0;
   }
