@@ -60,12 +60,14 @@ class Container extends PureComponent {
     })
   }
   searchNearHere() {
-    Router.push({
-      pathname: '/food',
-      query: {
-        near: 'here'
-      }
-    })
+    navigator.geolocation.getCurrentPosition(() => {
+      Router.push({
+        pathname: '/food',
+        query: {
+          near: 'here'
+        }
+      })
+    });
   }
   render() {
     return (

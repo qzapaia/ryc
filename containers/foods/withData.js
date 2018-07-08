@@ -21,10 +21,7 @@ export default class extends Component{
     } = this.props;
     
     const here = near == 'here';
-    
     const result = here ? await getFoodsNearHere() : await getFoodsNearAddress(near);
-    
-    console.log('result near', near, result);
     
     this.setState({
       foods:result.foods,
