@@ -26,6 +26,7 @@ export const IntroText = styled.h1`
   color: white;
   text-align: center;
   padding: 0 50px;
+  text-shadow: 0px 0px 5px rgba(150, 150, 150, 1);
 `
 
 export const NearMeSection = styled.div`
