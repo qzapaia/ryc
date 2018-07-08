@@ -4,7 +4,7 @@ import cloudinary from "../../lib/cloudinary"
 import LocationIcon from "../icons/location.svg"
 
 export const Root = styled.div`
-  background-image:url(${cloudinary.url("ryc/R_C_homeBack_2x.jpg")});
+  background-image:url(${cloudinary.secureURL("ryc/R_C_homeBack_2x.jpg", { secure: true })});
   background-size: cover;
   background-position: center center;
   display: flex;
@@ -17,7 +17,7 @@ export const LogoTipoContainer = styled.div`
 `
 export const StyledLogoTipo = styled(LogoTipo)`
   path{
-    fill: ${props=>props.theme.colors.aqua};
+    fill: ${props => props.theme.colors.aqua};
   }
 `
 export const IntroText = styled.h1`
