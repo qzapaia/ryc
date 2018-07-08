@@ -1,0 +1,5 @@
+- auth :|
+
+- form publicar comida en un solo paso (separar después en pasos)
+- agregar fechas disponibles y horarios limite para las comidas
+- ordenar y agrupar por dia (hoy, mañana, fecha ...)
