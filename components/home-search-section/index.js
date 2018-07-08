@@ -8,7 +8,7 @@ import {
 } from "./styled"
 import Button from "../button"
 
-export default () => (
+export default ({onSearchNearHere}) => (
   <Root>
     <LogoTipoContainer>
       <StyledLogoTipo />
@@ -19,7 +19,7 @@ export default () => (
     </IntroText>
 
     <NearMeSection>
-      <Button>
+      <Button onClick={onSearchNearHere}>
         <StyledLocationIcon></StyledLocationIcon>
         Cerca de mi ubicación actual
       </Button>

@@ -11,73 +11,71 @@ const LAST_NEIGHBORHOOD = 'last-neighborhood';
 
 
 class Container extends PureComponent {
-  constructor(){
+  constructor() {
     super()
     this.onAddressChange = this.onAddressChange.bind(this);
     this.onSubmitAddress = this.onSubmitAddress.bind(this);
     this.searchNearHere = this.searchNearHere.bind(this);
     this.onNeighborhoodChange = this.onNeighborhoodChange.bind(this);
-    
+
     this.state = {
       address: store.get(LAST_ADDRESS),
       neighborhood: store.get(LAST_NEIGHBORHOOD)
     }
   }
-  componentDidMount(){
+  componentDidMount() {
     // fuerza al componente a tomar el estado del cliente
-    this.setState({a:Math.random()})
+    this.setState({ a: Math.random() })
   }
-  onAddressChange(e){
+  onAddressChange(e) {
     const { value } = e.target;
 
     this.setState({
-      address:e.target.value
+      address: e.target.value
     })
   }
-  onNeighborhoodChange(e){
+  onNeighborhoodChange(e) {
     const { value } = e.target;
     store.set(LAST_NEIGHBORHOOD, value);
-    
+
     this.setState({
-      neighborhood:e.target.value
+      neighborhood: e.target.value
     })
   }
-  onSubmitAddress(e){
+  onSubmitAddress(e) {
     e.preventDefault();
 
     const {
       address,
       neighborhood
     } = this.state;
-    
+
     store.set(LAST_ADDRESS, address);
 
     Router.push({
       pathname: '/food',
-      query: { 
-        near:address + ' ' + neighborhood
+      query: {
+        near: address + ' ' + neighborhood
       }
     })
   }
-  searchNearHere(){
+  searchNearHere() {
     Router.push({
       pathname: '/food',
-      query: { 
-        near:'here'
+      query: {
+        near: 'here'
       }
     })
   }
   render() {
     return (
       <div>
-        <HomeSearchSection>
-          
-        </HomeSearchSection>
+        <HomeSearchSection onSearchNearHere={this.searchNearHere} />
         <h1>Buscar comidas:</h1>
         <form onSubmit={this.onSubmitAddress}>
-          <div>  
-            <input 
-              type="text" 
+          <div>
+            <input
+              type="text"
               onChange={this.onAddressChange}
               value={this.state.address}
             />
@@ -88,7 +86,7 @@ class Container extends PureComponent {
               value={this.state.neighborhood}
             >
               <option value="">Elegir barrio</option>
-              {barrios.map(b=>(
+              {barrios.map(b => (
                 <option value={b} key={b}>{b}</option>
               ))}
             </select>
@@ -99,7 +97,7 @@ class Container extends PureComponent {
             </button>
           </div>
         </form>
-        <br/>
+        <br />
         <button onClick={this.searchNearHere}>
           Mi ubicación actual
         </button>
@@ -121,7 +119,7 @@ Container.propTypes = {
 };
 
 Container.defaultProps = {
-  
+
 }
 
 export default Container;
