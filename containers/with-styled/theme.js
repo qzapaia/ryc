@@ -4,5 +4,6 @@ export default {
     secondary: "#6269B1",
     soft: "#6E76E0",
     aqua: "#9BFFED",
+    aquaDark: "#41DDC1"
   }
 }

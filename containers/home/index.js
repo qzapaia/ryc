@@ -4,7 +4,8 @@ import Router from 'next/router'
 import barrios from './barrios';
 import store from 'store2';
 import Link from 'next/link'
-import HomeSearchSection from "../../components/home-search-section"
+import HomeSearchSection from "./home-search-section"
+import {getCurrentPosition} from "../../lib/geo"
 
 const LAST_ADDRESS = 'last-address';
 const LAST_NEIGHBORHOOD = 'last-neighborhood';
@@ -20,12 +21,16 @@ class Container extends PureComponent {
 
     this.state = {
       address: store.get(LAST_ADDRESS),
-      neighborhood: store.get(LAST_NEIGHBORHOOD)
+      neighborhood: store.get(LAST_NEIGHBORHOOD),
+      redirectingToSearch: false
     }
   }
   componentDidMount() {
     // fuerza al componente a tomar el estado del cliente
-    this.setState({ a: Math.random() })
+    this.setState({ 
+      a: Math.random(), 
+      redirectingToSearch: false
+    })
   }
   onAddressChange(e) {
     const { value } = e.target;
@@ -43,36 +48,57 @@ class Container extends PureComponent {
     })
   }
   onSubmitAddress(e) {
-    e.preventDefault();
-
-    const {
-      address,
-      neighborhood
-    } = this.state;
+    const {address, neighborhood} = this.state;
 
     store.set(LAST_ADDRESS, address);
 
     Router.push({
       pathname: '/food',
       query: {
-        near: address + ' ' + neighborhood
+        near: address
       }
     })
   }
-  searchNearHere() {
-    navigator.geolocation.getCurrentPosition(() => {
-      Router.push({
-        pathname: '/food',
-        query: {
-          near: 'here'
-        }
-      })
-    });
+  async searchNearHere() {
+    this.setState({
+      redirectingToSearch: true
+    })
+    
+    // this is made like this for safari
+    try{
+      await getCurrentPosition({
+        timeout:10
+      });
+    }catch(e){
+      console.log(e)
+    }
+
+    this.setState({
+      redirectingToSearch: false
+    })
+
+    Router.push({
+      pathname: '/food',
+      query: {
+        near: 'here'
+      }
+    })
   }
   render() {
+    const { redirectingToSearch } = this.state;
+
     return (
       <div>
-        <HomeSearchSection onSearchNearHere={this.searchNearHere} />
+        <HomeSearchSection 
+          onSearchNearHere={this.searchNearHere} 
+          disableSearch={redirectingToSearch}
+          
+          onAddressChange={this.onAddressChange}
+          address={this.state.address}
+          onSearchByAddress={this.onSubmitAddress}
+        />
+
+
         <h1>Buscar comidas:</h1>
         <form onSubmit={this.onSubmitAddress}>
           <div>

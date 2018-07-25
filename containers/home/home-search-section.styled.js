@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import LogoTipo from "../icons/logotipo.svg"
-import cloudinary from "../../lib/cloudinary"
-import LocationIcon from "../icons/location.svg"
+import LogoTipo from "components/icons/logotipo.svg"
+import LocationIcon from "components/icons/location.svg"
+import cloudinary from "lib/cloudinary"
 
 export const Root = styled.div`
   background-image:url(${cloudinary.secureURL("ryc/R_C_homeBack_2x.jpg", { secure: true })});
@@ -10,10 +10,11 @@ export const Root = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 60px;
 `
 
 export const LogoTipoContainer = styled.div`
-  padding: 60px 0;
+  margin-bottom: 60px;
 `
 export const StyledLogoTipo = styled(LogoTipo)`
   path{
@@ -25,14 +26,21 @@ export const IntroText = styled.h1`
   font-size: 23px;
   color: white;
   text-align: center;
-  padding: 0 50px;
   text-shadow: 0px 0px 5px rgba(150, 150, 150, 1);
 `
 
 export const NearMeSection = styled.div`
-  padding: 45px 0;
+  margin: 45px 0 0;
 `
 export const StyledLocationIcon = styled(LocationIcon)`
   margin-right: 5px;
   height: 17px;
+`
+
+export const SearchByAddressSection = styled.form`
+  margin: 45px 0 0;
+`
+
+export const SearchByAddressButtonContainer = styled.div`
+  margin-top:10px;
 `

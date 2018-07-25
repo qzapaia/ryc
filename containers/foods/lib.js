@@ -1,6 +1,5 @@
 import { client as algoliaClient } from '../../lib/algolia';
-import { resolveAddress } from '../../lib/geocoding';
-const { promisify } = require("es6-promisify");
+import { resolveAddress, getCurrentPosition } from '../../lib/geo';
 
 const foodsIndex = algoliaClient.initIndex('ryc_foods');
 
@@ -45,15 +44,8 @@ export const getFoodsNearHere = async address => {
   }
 };
 
-
-export function getLocation () {
-  return new Promise(function (resolve, reject) {
-    navigator.geolocation.getCurrentPosition(resolve, reject);
-  });
-}
-
 export const getCurrentLocation = async () => {
-  const response  = await getLocation();
+  const response  = await getCurrentPosition();
   return {
     lat:response.coords.latitude,
     lng: response.coords.longitude

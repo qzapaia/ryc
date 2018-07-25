@@ -21,7 +21,7 @@ export default () => (
     </LogoContainer>
     <div>
 
-      <Link>
+      <Link href="/">
         <MenuSearchItem>
           <SearchIcon />
           <MenuSearchItemText>
@@ -30,7 +30,7 @@ export default () => (
         </MenuSearchItem>
       </Link>
 
-      <Link>
+      <Link href="/">
         <MenuItem>
           <MenuItemIcon>
             <BagIcon />

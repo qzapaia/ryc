@@ -9,31 +9,33 @@ class Container extends PureComponent {
       error,
       near
     } = this.props
-    
+
     return (
       <div>
         <h1>
           {
-            near == 'here' ? 
-            'Comidas cerca de aquí':
-            'Comidas cerca de ' + near
+            near == 'here' ?
+              'Comidas cerca de aquí' :
+              'Comidas cerca de ' + near
           }
         </h1>
         {
-        error ?
-          <h2>{error}</h2>
-        :
-        foods.length ?
-          foods.map(food=>(
-            <div>
-              id + {food.id}
-              <FoodCard key={food.id} {...food}></FoodCard>
-            </div>
-          ))
-          :
-          <h3>Buscando ...</h3>
+          error ?
+            <h2>{error}</h2>
+            :
+            foods.length ?
+              <div>
+                {foods.map(food => (
+                  <div key={food.id}>
+                    id + {food.id}
+                    <FoodCard {...food}></FoodCard>
+                  </div>
+                ))}
+              </div>
+              :
+              <h3>Buscando ...</h3>
         }
-        
+
       </div>
     );
   }
@@ -44,7 +46,7 @@ Container.propTypes = {
 };
 
 Container.defaultProps = {
-  foods:[]
+  foods: []
 }
 
 export default Container;

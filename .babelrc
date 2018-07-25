@@ -7,6 +7,14 @@
       "inline-react-svg"
     ],
     [
+      "module-resolver",
+      {
+        "root": [
+          "./"
+        ]
+      }
+    ],
+    [
       "styled-components",
       {
         "ssr": true,
