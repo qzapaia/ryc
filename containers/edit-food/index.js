@@ -1,22 +1,25 @@
-import InputText from "../../components/input-text"
-import InputSelect from "../../components/input-select"
+import InputText from "../../components/input-text";
+import InputSelect from "../../components/input-select";
+import OnlyUsers from "containers/only-users";
 
-export default ({id}) => (
-  <div>
+const LOGIN_MESSAGE = "Para publicar tus comidas primero ingresá a tu cuenta"
+
+export default ({ id }) => (
+  <OnlyUsers redirect="/edit-food" loginMessage={LOGIN_MESSAGE}>
     <h1>{id ? "Editar" : "Publicar"} Comida</h1>
-    
-    <hr/>
-    <h3>Nombre</h3>
-    <InputText type="text"/>
 
-    <hr/>
+    <hr />
+    <h3>Nombre</h3>
+    <InputText type="text" />
+
+    <hr />
     <h3>Descripción</h3>
-    <InputText type="text"/>
-    
-    <hr/>
+    <InputText type="text" />
+
+    <hr />
     <h3>¿Cuando lo cocinás?</h3>
     <div>
-      <input type="radio"/> Lo voy a cocinar:
+      <input type="radio" /> Lo voy a cocinar:
       <div>
         <InputSelect>
           <option value="">hoy</option>
@@ -51,11 +54,11 @@ export default ({id}) => (
         </InputSelect>
       </div>
     </div>
-    <hr/>
+    <hr />
 
     <div>
-      <input type="radio"/> Lo puedo cocinar a pedido
-      <input type="radio"/> No lo cocino a pedido
+      <input type="radio" /> Lo puedo cocinar a pedido
+      <input type="radio" /> No lo cocino a pedido
       <div>
         <span>Cuanto tiempo de anticipación necesitás? </span>
         <InputSelect>
@@ -70,5 +73,5 @@ export default ({id}) => (
         </InputSelect>
       </div>
     </div>
-  </div>
-)
+  </OnlyUsers>
+);

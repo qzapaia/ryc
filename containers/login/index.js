@@ -1,76 +1,74 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import Router from 'next/router'
-
-const LAST_NEIGHBORHOOD = 'last-neighborhood';
-
+import {PureComponent } from 'react';
+import autoBind from "react-autobind"
+import {InputDark} from "components/input-text"
+import {SecondaryButton} from "components/button"
+import {
+  Title, 
+  RootContainer, 
+  ButtonContainer,
+  Form,
+  EmailText,
+  SentEmail,
+  Postman,
+  LoginMessage
+} from "./styled"
 
 class Container extends PureComponent {
   constructor(){
     super()
-    this.onEmailChange = this.onEmailChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    autoBind(this)
     
     this.state = {
       email: '',
-      submitted:false
+      submitted: false
     }
   }
   onEmailChange(e){
-    const { value } = e.target;
-
-    this.setState({
-      email:e.target.value
-    })
+    this.setState({ email:e.target.value })
   }
   onSubmit(e){
     e.preventDefault();
-    this.setState({
-      submitted:true
-    })
-    const { onLogin } = this.props;
+    this.setState({ submitted:true })
     const { email } = this.state;
     
-    onLogin(email);
+    this.props.onLogin(email);
   }
   render() {
-    const {
-      submitted,
-    } = this.state;
-    const {
-      loading
-    } = this.props
-    
-    return (!submitted && !loading) ? (
-      <div>
-        <h1>Tu email:</h1>
-        <form onSubmit={this.onSubmit}>
-          <div>  
-            <input 
+    const {submitted, email} = this.state;
+    const {loading, loginMessage} = this.props;
+    const notSentYet = !submitted && !loading;
+    // const notSentYet = false
+
+    return notSentYet ? (
+      <RootContainer>
+        <Title>Ingresá con tu email</Title>
+        {loginMessage && (
+          <LoginMessage>
+            {loginMessage}
+          </LoginMessage>
+        )}
+        <Form onSubmit={this.onSubmit}>
+            <InputDark 
               type="email" 
+              placeholder="yo@gmail.com"
               onChange={this.onEmailChange}
-              value={this.state.email}
+              value={email}
             />
-          </div>
-          <div>
-            <button>
-              Ingresar
-            </button>
-          </div>
-        </form>
-      </div>
+            <ButtonContainer>
+              <SecondaryButton>Ingresar</SecondaryButton>
+            </ButtonContainer>
+        </Form>
+      </RootContainer>
     ) : (
-      <div>Te enviamos un mail con un link para ingresar a tu cuenta</div>
+      <RootContainer>
+        <SentEmail>
+          Te mandamos un mail a <EmailText>{email}</EmailText> con un botón para ingresar a tu cuenta
+        </SentEmail>
+        <Postman />
+      </RootContainer>
     )
   }
 }
 
-Container.propTypes = {
-
-};
-
-Container.defaultProps = {
-  
-}
 
 export default Container;

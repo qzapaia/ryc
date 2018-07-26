@@ -1,5 +1,5 @@
-import { client as algoliaClient } from '../../lib/algolia';
-import { resolveAddress, getCurrentPosition } from '../../lib/geo';
+import { client as algoliaClient } from 'lib/algolia';
+import { resolveAddress, getCurrentPosition } from 'lib/geo';
 
 const foodsIndex = algoliaClient.initIndex('ryc_foods');
 
@@ -28,6 +28,7 @@ export const getFoodsNearCoords = async  (coords) => {
   const algoliaResults = await foodsIndex.search({
     query: '',
     aroundLatLng: `${coords.lat}, ${coords.lng}`,
+    aroundRadius: 2000,
     getRankingInfo: true
   });
 

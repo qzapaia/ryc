@@ -1,5 +1,4 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import { PureComponent } from 'react';
 import FoodCard from '../../components/food-card';
 
 class Container extends PureComponent {

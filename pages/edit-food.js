@@ -14,7 +14,7 @@ const EditFoodPage = ({id}) => (
   </div>
 );
 
-EditFoodPage.getInitialProps = (loc) => pick(loc.query,['id'])
+EditFoodPage.getInitialProps = (ctx) => pick(ctx.query,['id'])
 
 EditFoodPage.propTypes = {
   

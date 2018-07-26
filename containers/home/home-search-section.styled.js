@@ -4,7 +4,7 @@ import LocationIcon from "components/icons/location.svg"
 import cloudinary from "lib/cloudinary"
 
 export const Root = styled.div`
-  background-image:url(${cloudinary.secureURL("ryc/R_C_homeBack_2x.jpg", { secure: true })});
+  background-image:url(${cloudinary.secureURL("ryc/R_C_homeBack_2x.jpg")});
   background-size: cover;
   background-position: center center;
   display: flex;

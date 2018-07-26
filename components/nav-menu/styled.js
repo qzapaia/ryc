@@ -28,16 +28,31 @@ export const MenuItem = styled.button`
   border: initial;
   padding: 0;
   width: 100%;
+  cursor: pointer;
 `
 
 export const MenuItemIcon = styled.div`
   width: 50px;
+  svg *{
+    fill:white
+  }
 `
 export const MenuItemText = styled.div`
   color:white;
   font-size: 16px;
-  font-family: "KometPro-Light";
-  `
+  font-family: "KometPro";
+  font-weight: 300;
+`
+
+export const AddMenuItem = MenuItem.extend`
+  ${MenuItemText}{
+    color: ${props => props.theme.colors.aqua};
+    font-weight: 500;
+  }
+  path{
+    fill: ${props => props.theme.colors.aqua};
+  }
+`
 
 export const MenuSearchItem = MenuItem.extend`
   background-color: ${props => props.theme.colors.soft};

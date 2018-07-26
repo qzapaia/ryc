@@ -1,20 +1,35 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from "styled-components"
 
+const Text = styled.div`
+  background-color:${props=>props.theme.colors.main};
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 33px;
+  color:white;
+`
 
 export default class extends Component {
   static getInitialProps(ctx){
+    const { token, redirect} = ctx.query;
+    
     return {
-      token: ctx.query.token
+      token,
+      redirect
     }
   }
   componentDidMount(){    
-    document.cookie = `token=${this.props.token};path=/`;
-    setTimeout(()=>location.href='/me', 1000);
+    const {token,redirect} = this.props;
+    document.cookie = `token=${token};path=/`;
+    
+    setTimeout(()=> location.href = redirect || '/', 1000);
   }
   render() {
-    return <div>
+    return <Text>
       Ingresando a tu cuenta ...
-    </div>
+    </Text>
   }
 }

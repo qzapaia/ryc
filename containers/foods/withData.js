@@ -2,9 +2,11 @@ import { Component } from 'react';
 import Comp from './';
 import {
   getFoodsNearAddress,
-  getFoodsNearHere,
-  getCurrentLocation,
+  getFoodsNearHere
 } from './lib';
+import store from 'store2';
+
+const LAST_ADDRESS = 'last-address';
 
 export default class extends Component{
   constructor(){
@@ -17,11 +19,19 @@ export default class extends Component{
   }
   async componentDidMount(){
     const {
-      near
+      near,
+      userGeoByIp = {}
     } = this.props;
     
+    const {
+      city = "",
+      country = ""
+    } = userGeoByIp
+
     const here = near == 'here';
-    const result = here ? await getFoodsNearHere() : await getFoodsNearAddress(near);
+    const result = here ? await getFoodsNearHere() : await getFoodsNearAddress(`${near}, ${city}, ${country}`);
+    
+    !here && store.set(LAST_ADDRESS, near);
     
     this.setState({
       foods:result.foods,
