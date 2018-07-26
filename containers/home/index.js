@@ -37,11 +37,7 @@ class Container extends PureComponent {
   }
   async searchNearHere() {
     // this is made like this for safari
-    try{
-      await getCurrentPosition({
-        timeout:10
-      });
-    }catch(e){ console.log(e) }
+    await getCurrentPosition();
 
     Router.push({
       pathname: '/food',
