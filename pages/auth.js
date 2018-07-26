@@ -10,6 +10,7 @@ const Text = styled.div`
   align-items: center;
   font-size: 33px;
   color:white;
+  padding:20px;
 `
 
 export default class extends Component {
