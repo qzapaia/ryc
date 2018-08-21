@@ -1,5 +1,7 @@
 - auth :|
-
+- revisar frase de la home
+- confirmar sesion eterna
+- Hace más claro que no necesitas cuenta (ingresá solo con tu mail)
 - form publicar comida en un solo paso (separar después en pasos)
 - agregar fechas disponibles y horarios limite para las comidas
 - ordenar y agrupar por dia (hoy, mañana, fecha ...)

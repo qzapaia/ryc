@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
-import Router from "next/router"
-import LoginContainer from "containers/login/withData"
+import Router from "next/router";
+import LoginContainer from "containers/login/withData";
 
 const ME = gql`
   query {
@@ -11,21 +11,17 @@ const ME = gql`
   }
 `;
 
-export default ({redirect, loginMessage, children}) => (
+export default ({ redirect, loginMessage, children }) => (
   <Query query={ME}>
     {({ loading, data, error }) => {
-      if(!loading, !error, !data.me){
-        return <LoginContainer redirect={redirect} loginMessage={loginMessage} />
-        // Router.push({
-        //   pathname: '/login',
-        //   query: {
-        //     redirect
-        //   }
-        // })
-      }else if(data.me){
-        return children
-      }else{        
-        return <span></span>
+      if (loading) {
+        return <span />;
+      } else if (!loading && !error && !data.me) {
+        return (
+          <LoginContainer redirect={redirect} loginMessage={loginMessage} />
+        );
+      } else if (data.me) {
+        return children;
       }
     }}
   </Query>

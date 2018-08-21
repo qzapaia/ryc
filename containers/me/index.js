@@ -1,26 +1,63 @@
-import gql from 'graphql-tag'
-import { Query } from "react-apollo";
+import gql from "graphql-tag";
+import { Query, Mutation } from "react-apollo";
+import OnlyUsers from "containers/only-users";
+import Input from "components/input-text";
 
 const ME = gql`
-  query{
-    me{
-      id,
-      email
+  query {
+    me {
+      id
+      fullName
     }
   }
 `;
 
-export default () => (
+const UPDATE_USER = gql`
+  mutation updateUser($fullName: String!, $myId: ID!) {
+    updateUser(fullName: $fullName, id: $myId) {
+      fullName,
+      id
+    }
+  }
+`;
+
+const View = ({ me, onUserUpdate }) => (
   <div>
-    <h1>me</h1>
+    <h2>Primer Nombre:</h2>
+    <div>
+      <Input
+        value={me.fullName}
+        onChange={e => onUserUpdate({ fullName: e.target.value })}
+      />
+    </div>
+  </div>
+);
+
+export default ({ firstTime }) => (
+  <OnlyUsers redirect="/me">
     <Query query={ME}>
-      {({loading, data, error})=>(
-        <div>
-          error: {error} <br/>
-          loading: {loading} <br/>
-          me: {JSON.stringify(data.me)}
-        </div>
+      {({ loading, data, error }) => (
+        console.log(loading, data, error) ||
+        <Mutation mutation={UPDATE_USER}>
+          {(updateUser) => {
+            console.log(data)
+            const onUserUpdate = user => updateUser({
+              variables: {
+                ...user,
+                myId: data.me.id
+              }
+            })
+
+            return (
+              <View
+                me={data.me || ""}
+                onUserUpdate={onUserUpdate}
+              />
+            );
+
+          }}
+        </Mutation>
       )}
     </Query>
-  </div>
-)
+  </OnlyUsers>
+);

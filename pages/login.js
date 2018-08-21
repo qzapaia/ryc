@@ -1,27 +1,16 @@
-import Head from 'next/head'
-import AppLayout from '../containers/app-layout';
-import LoginContainer from '../containers/login/withData';
+import Head from "next/head";
+import AppLayout from "../containers/app-layout";
+import LoginContainer from "../containers/login/withData";
 
-const LoginPage = ({redirect}) => (
+const LoginPage = () => (
   <div>
     <Head>
-      <title>Rico y Casero</title>  
+      <title>Rico y Casero</title>
     </Head>
     <AppLayout>
-      <LoginContainer redirect={redirect} />
+      <LoginContainer />
     </AppLayout>
   </div>
 );
-
-LoginPage.getInitialProps = ({ req, query }) => {
-  const {
-    redirect
-  } = query;
-
-  return {
-    redirect
-  }
-}
-
 
 export default LoginPage;

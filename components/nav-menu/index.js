@@ -9,10 +9,11 @@ import {
   MenuSearchItemText,
   AddMenuItem
 } from "./styled"
-import SearchIcon from "./search-icon.svg"
-import BagIcon from "./bag-icon.svg"
+import SearchIcon from "components/icons/search-icon.svg"
+import BagIcon from "components/icons/bag-icon.svg"
 import UserIcon from "components/icons/user.svg"
 import Addicon from "components/icons/add.svg"
+import LogoutIcon from "components/icons/logout.svg"
 import Link from 'next/link'
 
 export default ({ onLogout, me }) => (
@@ -59,7 +60,7 @@ export default ({ onLogout, me }) => (
         (
           <MenuItem onClick={onLogout}>
             <MenuItemIcon>
-              <BagIcon />
+              <LogoutIcon />
             </MenuItemIcon>
             <MenuItemText>
               Cerrar Sesión

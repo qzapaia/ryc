@@ -26,7 +26,7 @@ export default class extends Component {
     const {token,redirect} = this.props;
     document.cookie = `token=${token};path=/`;
     
-    setTimeout(()=> location.href = redirect || '/', 1000);
+    setTimeout(()=> location.href = '/', 1000);
   }
   render() {
     return <Text>

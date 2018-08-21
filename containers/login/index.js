@@ -8,9 +8,10 @@ import {
   ButtonContainer,
   Form,
   EmailText,
-  SentEmail,
-  Postman,
-  LoginMessage
+  Error,
+  LoginMessage,
+  Disclaimer,
+  CodeInput
 } from "./styled"
 
 class Container extends PureComponent {
@@ -20,51 +21,73 @@ class Container extends PureComponent {
     
     this.state = {
       email: '',
+      code: '',
       submitted: false
     }
   }
   onEmailChange(e){
     this.setState({ email:e.target.value })
   }
-  onSubmit(e){
+  onCodeChange(e){
+    this.setState({ code:e.target.value })
+  }
+  onSubmitEmail(e){
     e.preventDefault();
     this.setState({ submitted:true })
     const { email } = this.state;
     
-    this.props.onLogin(email);
+    this.props.onSignUpIn(email);
+  }
+  onSubmitCode(e){
+    e.preventDefault();
+    const { email, code } = this.state;
+    this.props.onAuth(email, code);
   }
   render() {
-    const {submitted, email} = this.state;
-    const {loading, loginMessage} = this.props;
-    const notSentYet = !submitted && !loading;
-    // const notSentYet = false
+    const {submitted, email, code} = this.state;
+    const {loginMessage, onAuthLoading, onAuthError} = this.props;
 
-    return notSentYet ? (
+    return (!submitted) ? (
       <RootContainer>
-        <Title>Ingresá con tu email</Title>
+        <Title>Ingresá solo con tu email</Title>
         {loginMessage && (
           <LoginMessage>
             {loginMessage}
           </LoginMessage>
         )}
-        <Form onSubmit={this.onSubmit}>
+        <Form onSubmit={this.onSubmitEmail}>
             <InputDark 
               type="email" 
               placeholder="yo@gmail.com"
               onChange={this.onEmailChange}
               value={email}
-            />
+              autocomplete="on"
+              />
             <ButtonContainer>
               <SecondaryButton>Ingresar</SecondaryButton>
             </ButtonContainer>
         </Form>
+        <Disclaimer>No importa si es la primera vez</Disclaimer>
       </RootContainer>
     ) : (
       <RootContainer>
-        <SentEmail>
-          Te mandamos un mail a <EmailText>{email}</EmailText> con un botón para ingresar a tu cuenta
-        </SentEmail>
-        <Postman />
+        <Title>
+          Te enviamos un mail a <EmailText>{email}</EmailText> con un código para ingresar a tu cuenta
+        </Title>
+        <Form onSubmit={this.onSubmitCode}>
+            <CodeInput 
+              type="text"
+              maxlength="6"
+              placeholder="------"
+              onChange={this.onCodeChange}
+              value={code}
+              disabled={onAuthLoading}
+            />
+            {onAuthError && <Error>! {onAuthError}</Error>}
+            <ButtonContainer>
+              <SecondaryButton disabled={onAuthLoading}>Ingresar</SecondaryButton>
+            </ButtonContainer>
+        </Form>
       </RootContainer>
     )
   }
