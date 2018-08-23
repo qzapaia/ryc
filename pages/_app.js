@@ -2,7 +2,7 @@
 import App, { Container } from 'next/app'
 import React from 'react'
 import { ApolloProvider } from 'react-apollo'
-import withData from '../lib/withData'
+import withApollo from 'lib/withApollo'
 import WithStyled from "../containers/with-styled"
 
 class MyApp extends App {
@@ -20,4 +20,4 @@ class MyApp extends App {
   }
 }
 
-export default withData(MyApp)
+export default withApollo(MyApp)

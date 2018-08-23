@@ -2,10 +2,10 @@ import InputText from "../../components/input-text";
 import InputSelect from "../../components/input-select";
 import OnlyUsers from "containers/only-users";
 
-const LOGIN_MESSAGE = "Para publicar tus comidas primero ingresá a tu cuenta"
+const LOGIN_MESSAGE = "Para publicar tus comidas primero debés ingresár"
 
 export default ({ id }) => (
-  <OnlyUsers redirect="/edit-food" loginMessage={LOGIN_MESSAGE}>
+  <OnlyUsers loginMessage={LOGIN_MESSAGE}>
     <h1>{id ? "Editar" : "Publicar"} Comida</h1>
 
     <hr />

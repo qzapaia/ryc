@@ -11,7 +11,7 @@ export const Title = styled.h1`
   font-size: 23px;
 `
 
-export const LoginMessage = styled.div`
+export const SubTitle = styled.div`
   font-size: 16px;
   margin-top: 20px;
 `
@@ -51,4 +51,9 @@ export const CodeInput = styled(InputDark)`
   text-align: center;
   font-size: 24px;
   letter-spacing: 10px;
+`
+
+export const CodeNotReceived = styled.div`
+  font-size: 16px;
+  margin-top: 20px;
 `

@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import {InputButtonBox} from "components/boxes"
+import Color from "color"
 
 export const Button = InputButtonBox.withComponent("button").extend`
   background-color: initial;
@@ -19,6 +20,11 @@ export const Button = InputButtonBox.withComponent("button").extend`
 
 export const SecondaryButton = Button.extend`
   background-color: ${props=>props.theme.colors.aquaDark};
+
+  &[disabled]{
+    background-color: ${props=>props.theme.colors.aquaDark};
+    color: ${props=>Color(props.theme.colors.aquaDark).darken(0.3).hsl().string()};
+  }
 `
 
 export const AuxButton = Button.extend`

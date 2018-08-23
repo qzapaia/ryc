@@ -11,14 +11,14 @@ const ME = gql`
   }
 `;
 
-export default ({ redirect, loginMessage, children }) => (
+export default ({ loginMessage, children }) => (
   <Query query={ME}>
     {({ loading, data, error }) => {
       if (loading) {
         return <span />;
       } else if (!loading && !error && !data.me) {
         return (
-          <LoginContainer redirect={redirect} loginMessage={loginMessage} />
+          <LoginContainer loginMessage={loginMessage} />
         );
       } else if (data.me) {
         return children;

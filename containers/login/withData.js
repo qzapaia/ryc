@@ -1,8 +1,10 @@
 import { compose, graphql } from "react-apollo";
 import gql from "graphql-tag";
 import View from "./";
-import { Mutation } from "react-apollo";
-import {get} from "lodash";
+import { Mutation, ApolloConsumer } from "react-apollo";
+import { get } from "lodash";
+import Router from 'next/router'
+
 
 const dev = process.env.NODE_ENV == "development";
 
@@ -21,41 +23,44 @@ const AUTH = gql`
   }
 `;
 
-// {console.log(get(authData,'auth.token'), get(signUpInData,'signUpIn.message'))}
-
-const onAuthCompleted = (data) => {
+const onAuthCompleted = (client, afterLoginRedirectTo) => data => {
   document.cookie = `token=${data.auth.token};path=/`;
-  setTimeout(()=> location.href = '/', 10);
-}
+  client.resetStore();
+  afterLoginRedirectTo && Router.push(afterLoginRedirectTo);
+};
 
-export default (props) => (
-  <Mutation mutation={AUTH} onCompleted={onAuthCompleted}>
-    {(auth, { data: authData, error: authError, loading: authLoading}) => (
-      <Mutation mutation={SIGNUP_IN}>
-        {(signUpIn, { data: signUpInData }) => (
-          <div>
-            <View
-              onSignUpIn={email =>
-                signUpIn({
-                  variables: { email }
-                })
-              }
-              onAuth={(email, code) =>
-                auth({
-                  variables: { 
-                    email,
-                    code 
-                  }
-                })
-              }
-
-              onAuthLoading={authLoading}
-              onAuthError={get(authError,'graphQLErrors.0.functionError.message')}
-              {...props}
-            />
-          </div>
+export default props => (
+  <ApolloConsumer>
+    {client => (
+      <Mutation mutation={AUTH} onCompleted={onAuthCompleted(client,props.afterLoginRedirectTo)}>
+        {(auth, { data, error: authError, loading: authLoading }) => (
+          <Mutation mutation={SIGNUP_IN}>
+            {(signUpIn, { data: signUpInData }) => (
+              <View
+                onSignUpIn={email =>
+                  signUpIn({
+                    variables: { email }
+                  })
+                }
+                onAuth={(email, code) =>
+                  auth({
+                    variables: {
+                      email,
+                      code
+                    }
+                  })
+                }
+                authLoading={authLoading}
+                authError={get(
+                  authError,
+                  "graphQLErrors.0.functionError.message"
+                )}
+                {...props}
+              />
+            )}
+          </Mutation>
         )}
       </Mutation>
     )}
-  </Mutation>
+  </ApolloConsumer>
 );

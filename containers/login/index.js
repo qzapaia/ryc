@@ -2,6 +2,9 @@ import {PureComponent } from 'react';
 import autoBind from "react-autobind"
 import {InputDark} from "components/input-text"
 import {SecondaryButton} from "components/button"
+import Link from 'next/link'
+import Router from 'next/router'
+
 import {
   Title, 
   RootContainer, 
@@ -9,9 +12,10 @@ import {
   Form,
   EmailText,
   Error,
-  LoginMessage,
+  SubTitle,
   Disclaimer,
-  CodeInput
+  CodeInput,
+  CodeNotReceived
 } from "./styled"
 
 class Container extends PureComponent {
@@ -21,8 +25,7 @@ class Container extends PureComponent {
     
     this.state = {
       email: '',
-      code: '',
-      submitted: false
+      code: ''
     }
   }
   onEmailChange(e){
@@ -33,10 +36,9 @@ class Container extends PureComponent {
   }
   onSubmitEmail(e){
     e.preventDefault();
-    this.setState({ submitted:true })
     const { email } = this.state;
-    
     this.props.onSignUpIn(email);
+    Router.push("/login?step=insertCode")
   }
   onSubmitCode(e){
     e.preventDefault();
@@ -45,15 +47,35 @@ class Container extends PureComponent {
   }
   render() {
     const {submitted, email, code} = this.state;
-    const {loginMessage, onAuthLoading, onAuthError} = this.props;
+    const {loginMessage, authLoading, authError, step} = this.props;
 
-    return (!submitted) ? (
+    return (step == "insertCode") ? (
+      <RootContainer>
+        <Title>
+          Te enviamos un mail a <EmailText>{email}</EmailText> con un código
+        </Title>
+        <SubTitle>Ingresalo para continuar</SubTitle>
+        <Form onSubmit={this.onSubmitCode}>
+            <CodeInput 
+              type="text"
+              maxlength="6"
+              placeholder="------"
+              onChange={this.onCodeChange}
+              value={code}
+              disabled={authLoading}
+            />
+            {authError && <Error>! {authError}</Error>}
+            <ButtonContainer>
+              <SecondaryButton disabled={authLoading}>Ingresar</SecondaryButton>
+            </ButtonContainer>
+            <CodeNotReceived>¿No te llegó? <Link href="/login"><a>Click aquí</a></Link></CodeNotReceived>
+        </Form>
+      </RootContainer>
+    ) : (
       <RootContainer>
         <Title>Ingresá solo con tu email</Title>
         {loginMessage && (
-          <LoginMessage>
-            {loginMessage}
-          </LoginMessage>
+          <SubTitle>{loginMessage}</SubTitle>
         )}
         <Form onSubmit={this.onSubmitEmail}>
             <InputDark 
@@ -64,30 +86,10 @@ class Container extends PureComponent {
               autocomplete="on"
               />
             <ButtonContainer>
-              <SecondaryButton>Ingresar</SecondaryButton>
+              <SecondaryButton disabled={!email}>Ingresar</SecondaryButton>
             </ButtonContainer>
         </Form>
         <Disclaimer>No importa si es la primera vez</Disclaimer>
-      </RootContainer>
-    ) : (
-      <RootContainer>
-        <Title>
-          Te enviamos un mail a <EmailText>{email}</EmailText> con un código para ingresar a tu cuenta
-        </Title>
-        <Form onSubmit={this.onSubmitCode}>
-            <CodeInput 
-              type="text"
-              maxlength="6"
-              placeholder="------"
-              onChange={this.onCodeChange}
-              value={code}
-              disabled={onAuthLoading}
-            />
-            {onAuthError && <Error>! {onAuthError}</Error>}
-            <ButtonContainer>
-              <SecondaryButton disabled={onAuthLoading}>Ingresar</SecondaryButton>
-            </ButtonContainer>
-        </Form>
       </RootContainer>
     )
   }
