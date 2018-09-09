@@ -11,4 +11,12 @@ export const InputDark = Input.extend`
   }
 `;
 
+export const TextAreaDark = InputDark.withComponent('textarea').extend`
+  min-height: 200px;
+`
+
+export const InputDarkFullWidth = InputDark.extend`
+  width: 100%;
+`
+
 export default Input

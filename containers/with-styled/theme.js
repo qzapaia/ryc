@@ -6,7 +6,7 @@ export default {
     aqua: "#9BFFED",
     aquaDark: "#41DDC1",
     gray:"#353536",
-    grayLight:"#F1F1F1",
+    grayLight:"#F6F6F6",
     coral:"#FF6D69"
   }
 }

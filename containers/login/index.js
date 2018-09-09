@@ -3,7 +3,7 @@ import autoBind from "react-autobind"
 import {InputDark} from "components/input-text"
 import {SecondaryButton} from "components/button"
 import Link from 'next/link'
-import Router from 'next/router'
+import withControlledProps from "../../lib/withControlledProps"
 
 import {
   Title, 
@@ -22,33 +22,30 @@ class Container extends PureComponent {
   constructor(){
     super()
     autoBind(this)
-    
-    this.state = {
-      email: '',
-      code: ''
-    }
-  }
-  onEmailChange(e){
-    this.setState({ email:e.target.value })
-  }
-  onCodeChange(e){
-    this.setState({ code:e.target.value })
   }
   onSubmitEmail(e){
     e.preventDefault();
-    const { email } = this.state;
-    this.props.onSignUpIn(email);
-    Router.push("/login?step=insertCode")
+    const { email, onStepChange, onSignUpIn } = this.props;
+    onSignUpIn(email);
+    onStepChange('insertCode')
   }
   onSubmitCode(e){
     e.preventDefault();
-    const { email, code } = this.state;
+    const { email, code } = this.props;
     this.props.onAuth(email, code);
   }
   render() {
-    const {submitted, email, code} = this.state;
-    const {loginMessage, authLoading, authError, step} = this.props;
-
+    const {
+      loginMessage, 
+      authLoading, 
+      authError, 
+      step, 
+      code, 
+      email,
+      onEmailChange,
+      onCodeChange
+    } = this.props;
+    
     return (step == "insertCode") ? (
       <RootContainer>
         <Title>
@@ -60,7 +57,7 @@ class Container extends PureComponent {
               type="text"
               maxlength="6"
               placeholder="------"
-              onChange={this.onCodeChange}
+              onChange={e=>onCodeChange(e.target.value)}
               value={code}
               disabled={authLoading}
             />
@@ -81,7 +78,7 @@ class Container extends PureComponent {
             <InputDark 
               type="email" 
               placeholder="yo@gmail.com"
-              onChange={this.onEmailChange}
+              onChange={e=>onEmailChange(e.target.value)}
               value={email}
               autocomplete="on"
               />
@@ -95,5 +92,7 @@ class Container extends PureComponent {
   }
 }
 
+const enhace = withControlledProps(['email','step','code'])
 
-export default Container;
+
+export default enhace(Container);

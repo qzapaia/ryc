@@ -7,14 +7,18 @@ import {
   MenuItemText,
   MenuSearchItem,
   MenuSearchItemText,
-  AddMenuItem
-} from "./styled"
-import SearchIcon from "components/icons/search-icon.svg"
-import BagIcon from "components/icons/bag-icon.svg"
-import UserIcon from "components/icons/user.svg"
-import Addicon from "components/icons/add.svg"
-import LogoutIcon from "components/icons/logout.svg"
-import Link from 'next/link'
+  AddMenuItem,
+  LogoutMenuItem,
+  GroupTitle
+} from "./styled";
+import SearchIcon from "components/icons/search-icon.svg";
+import BagIcon from "components/icons/bag-icon.svg";
+import UserIcon from "components/icons/user.svg";
+import Addicon from "components/icons/add.svg";
+import LogoutIcon from "components/icons/logout.svg";
+import BellIcon from "components/icons/bell.svg";
+import HatIcon from "components/icons/hat.svg";
+import Link from "next/link";
 
 export default ({ onLogout, me }) => (
   <Root>
@@ -24,61 +28,72 @@ export default ({ onLogout, me }) => (
       </Link>
     </LogoContainer>
     <div>
-
       <Link href="/">
         <MenuSearchItem>
           <SearchIcon />
-          <MenuSearchItemText>
-            BUSCAR
-          </MenuSearchItemText>
+          <MenuSearchItemText>BUSCAR</MenuSearchItemText>
         </MenuSearchItem>
       </Link>
 
       <Link href="/">
-        <MenuItem>
+        <MenuItem noBorder>
           <MenuItemIcon>
             <BagIcon />
           </MenuItemIcon>
-          <MenuItemText>
-            Mis Pedidos
-          </MenuItemText>
+          <MenuItemText>Mis Pedidos</MenuItemText>
         </MenuItem>
       </Link>
+
+      {me && (
+        <div>
+          <GroupTitle>Cocinero</GroupTitle>
+          
+          <Link href="/">
+            <MenuItem>
+              <MenuItemIcon>
+                <BellIcon />
+              </MenuItemIcon>
+              <MenuItemText>Mis encargos</MenuItemText>
+            </MenuItem>
+          </Link>
+          
+          <Link href="/my-food">
+            <MenuItem>
+              <MenuItemIcon>
+                <HatIcon />
+              </MenuItemIcon>
+              <MenuItemText>Mis comidas</MenuItemText>
+            </MenuItem>
+          </Link>
+        </div>
+      )}
 
       <Link href="/edit-food">
         <AddMenuItem>
           <MenuItemIcon>
             <Addicon />
           </MenuItemIcon>
-          <MenuItemText>
-            PUBLICAR COMIDA
-          </MenuItemText>
+          <MenuItemText>PUBLICAR COMIDA</MenuItemText>
         </AddMenuItem>
       </Link>
 
-      {me ?
-        (
-          <MenuItem onClick={onLogout}>
+      {me ? (
+        <LogoutMenuItem noBorder onClick={onLogout}>
+          <MenuItemIcon>
+            <LogoutIcon />
+          </MenuItemIcon>
+          <MenuItemText>Cerrar Sesión</MenuItemText>
+        </LogoutMenuItem>
+      ) : (
+        <Link href="/login">
+          <MenuItem noBorder>
             <MenuItemIcon>
-              <LogoutIcon />
+              <UserIcon />
             </MenuItemIcon>
-            <MenuItemText>
-              Cerrar Sesión
-          </MenuItemText>
+            <MenuItemText>Mi Perfil / Ingresar</MenuItemText>
           </MenuItem>
-        ) : (
-          <Link href="/login">
-            <MenuItem>
-              <MenuItemIcon>
-                <UserIcon />
-              </MenuItemIcon>
-              <MenuItemText>
-                Mi Perfil / Ingresar
-              </MenuItemText>
-            </MenuItem>
-          </Link>
-        )
-      }
+        </Link>
+      )}
     </div>
   </Root>
-)
+);

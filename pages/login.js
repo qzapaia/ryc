@@ -2,6 +2,20 @@ import Head from "next/head";
 import AppLayout from "../containers/app-layout";
 import LoginContainer from "../containers/login/withData";
 import {pick} from "lodash";
+import Router from 'next/router'
+
+const onSignUpIn = email => {
+  Router.push({
+    pathname: '/login',
+    query: { 
+      email,
+      step: 'insertCode'
+    }
+  })
+}
+const onAuthCompleted = () => {
+  Router.push("/?welcome");
+}
 
 const LoginPage = (props) => (
   <div>
@@ -9,11 +23,15 @@ const LoginPage = (props) => (
       <title>Rico y Casero</title>
     </Head>
     <AppLayout>
-      <LoginContainer afterLoginRedirectTo="/?welcome" {...props} />
+      <LoginContainer 
+        onAuthCompleted={onAuthCompleted}
+        onSignUpIn={onSignUpIn}
+        {...props} 
+      />
     </AppLayout>
   </div>
 );
 
-LoginPage.getInitialProps = (ctx) => pick(ctx.query,['step'])
+LoginPage.getInitialProps = (ctx) => pick(ctx.query,['step','email'])
 
 export default LoginPage;

@@ -6,3 +6,7 @@ export const InputButtonBox = styled.button`
   border: none;
   min-width: 285px;
 `
+
+export const PageContainer = styled.div`
+  padding: 10px;
+`

@@ -4,16 +4,7 @@ import { Root, MenuContainer, MenuAnimation } from "./styled"
 import Header from "./header"
 import Menu from "../../components/nav-menu"
 import autoBind from "react-autobind"
-import { Query } from "react-apollo";
-import gql from 'graphql-tag'
-
-const ME = gql`
-  query{
-    me{
-      id
-    }
-  }
-`;
+import WithMe from "containers/with-me"
 
 class AppLayout extends PureComponent {
   constructor() {
@@ -55,9 +46,9 @@ class AppLayout extends PureComponent {
 const AppLayoutWithState = withState("menuShowed", "showMenu", false)(AppLayout)
 
 const AppLayoutWithData = (props) => (
-  <Query query={ME}>
-    {({ data }) => <AppLayoutWithState {...props} me={data && data.me} />}
-  </Query>
+  <WithMe>
+    {({ me }) => <AppLayoutWithState {...props} me={me} />}
+  </WithMe>
 )
 
 export default AppLayoutWithData;

@@ -1,12 +1,9 @@
-import { compose, graphql } from "react-apollo";
+import cookie from "cookie"
+import moment from "moment"
 import gql from "graphql-tag";
 import View from "./";
 import { Mutation, ApolloConsumer } from "react-apollo";
 import { get } from "lodash";
-import Router from 'next/router'
-
-
-const dev = process.env.NODE_ENV == "development";
 
 const SIGNUP_IN = gql`
   mutation signUpIn($email: String!) {
@@ -23,25 +20,34 @@ const AUTH = gql`
   }
 `;
 
-const onAuthCompleted = (client, afterLoginRedirectTo) => data => {
-  document.cookie = `token=${data.auth.token};path=/`;
+const onAuthCompleted = (client, props) => data => {
+  const tokenCookie = cookie.serialize('token', data.auth.token, {
+    expires:moment().add("1","year").toDate(),
+    path: "/"
+  });
+  document.cookie = tokenCookie;
   client.resetStore();
-  afterLoginRedirectTo && Router.push(afterLoginRedirectTo);
+  props.onAuthCompleted && props.onAuthCompleted();
 };
 
 export default props => (
   <ApolloConsumer>
     {client => (
-      <Mutation mutation={AUTH} onCompleted={onAuthCompleted(client,props.afterLoginRedirectTo)}>
+      <Mutation
+        mutation={AUTH}
+        onCompleted={onAuthCompleted(client, props)}
+      >
         {(auth, { data, error: authError, loading: authLoading }) => (
           <Mutation mutation={SIGNUP_IN}>
-            {(signUpIn, { data: signUpInData }) => (
+            {(signUpIn, { data: signUpInData, loading: signupInLoading }) => (
               <View
-                onSignUpIn={email =>
+                {...props}
+                onSignUpIn={email => {
                   signUpIn({
                     variables: { email }
-                  })
-                }
+                  });
+                  props.onSignUpIn && props.onSignUpIn(email);
+                }}
                 onAuth={(email, code) =>
                   auth({
                     variables: {
@@ -51,11 +57,11 @@ export default props => (
                   })
                 }
                 authLoading={authLoading}
+                signupInLoading={signupInLoading}
                 authError={get(
                   authError,
                   "graphQLErrors.0.functionError.message"
                 )}
-                {...props}
               />
             )}
           </Mutation>

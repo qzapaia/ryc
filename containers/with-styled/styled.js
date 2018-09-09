@@ -5,10 +5,11 @@ injectGlobal`
     box-sizing:border-box;
   }
 
-  body, input, button {
+  body, input, button, textarea {
     font-family: "KometPro", Arial;
     margin: 0;
     outline:none;
+    border: none;
     letter-spacing:-0.5px;
   }
   

@@ -20,12 +20,12 @@ export const LogoContainer = styled.div`
 `
 
 export const MenuItem = styled.button`
+  color:white;
   height: 67px;
-  border-bottom: solid 1px ${props => props.theme.colors.secondary};
+  border-bottom: ${props => props.noBorder ? '' : 'solid 1px #FFFFFF33'};
   display: flex;
   align-items: center;
   background-color: initial;
-  border: initial;
   padding: 0;
   width: 100%;
   cursor: pointer;
@@ -34,17 +34,30 @@ export const MenuItem = styled.button`
 export const MenuItemIcon = styled.div`
   width: 50px;
   svg *{
-    fill:white
+    fill:white;
   }
 `
 export const MenuItemText = styled.div`
-  color:white;
   font-size: 16px;
   font-family: "KometPro";
   font-weight: 300;
 `
+export const LogoutMenuItem = MenuItem.extend`
+  border-top:solid 1px #FFFFFF78;
+`
+
+export const GroupTitle = styled.div`
+  font-size: 12px;
+  font-weight: 500;
+  color: #FFFFFF66;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  border-top: solid 1px #FFFFFF66;
+  padding: 9px 0 0 13px;
+`
 
 export const AddMenuItem = MenuItem.extend`
+  border-bottom: none;
   ${MenuItemText}{
     color: ${props => props.theme.colors.aqua};
     font-weight: 500;

@@ -1,7 +1,17 @@
-- auth :|
+
+- cambiar la frase de la home cuando vuelve de ingresar
 - revisar frase de la home
 - confirmar sesion eterna
-- Hace más claro que no necesitas cuenta (ingresá solo con tu mail)
 - form publicar comida en un solo paso (separar después en pasos)
+- los platos tienen varias fechas de reparto (fecha - porciones - hora de cierre - hora de reparto)
+- un plato está activo mientras tenga al menos una fecha de reparto futura
 - agregar fechas disponibles y horarios limite para las comidas
+
+- Proponer dejar tu mail cuando no se encuentran resultados
+
+Buscador
 - ordenar y agrupar por dia (hoy, mañana, fecha ...)
+
+- la aclaración al pedir un plato es el primer mensaje de la charla
+
+- usar mapas de mapbox

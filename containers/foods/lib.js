@@ -29,7 +29,8 @@ export const getFoodsNearCoords = async  (coords) => {
     query: '',
     aroundLatLng: `${coords.lat}, ${coords.lng}`,
     aroundRadius: 2000,
-    getRankingInfo: true
+    getRankingInfo: true,
+    // "facetFilters": "delivery_dates.date:2018-09-02",
   });
 
   return algoliaResults ? algoliaResults.hits : [];
