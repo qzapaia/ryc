@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 import {map} from "lodash";
-import { Query, Mutation } from "react-apollo";
+import { Mutation } from "react-apollo";
 import WithMe from "containers/with-me";
 
 const UPDATE_USER = gql`
