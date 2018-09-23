@@ -19,6 +19,7 @@ export const MenuContainer = styled.div`
   min-height: 100vh;
   height: 100%;
   transform: translateX(${props => props.show ? "0" : "-100%"});
+  z-index:10;
 `
 
 export const MenuAnimation = styled.div`

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Root,
   StyledLogoTipo,
@@ -18,7 +19,6 @@ import Addicon from "components/icons/add.svg";
 import LogoutIcon from "components/icons/logout.svg";
 import BellIcon from "components/icons/bell.svg";
 import HatIcon from "components/icons/hat.svg";
-import Link from "next/link";
 
 export default ({ onLogout, me }) => (
   <Root>

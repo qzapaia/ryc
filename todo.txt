@@ -1,4 +1,5 @@
-
+- https://www.mapbox.com/
+- https://github.com/mariusandra/pigeon-maps
 - cambiar la frase de la home cuando vuelve de ingresar
 - revisar frase de la home
 - confirmar sesion eterna

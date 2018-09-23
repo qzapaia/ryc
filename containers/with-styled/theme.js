@@ -8,5 +8,8 @@ export default {
     gray:"#353536",
     grayLight:"#F6F6F6",
     coral:"#FF6D69"
+  },
+  screens:{
+    small:768
   }
 }

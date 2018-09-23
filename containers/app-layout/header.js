@@ -1,6 +1,6 @@
-import { AppHeader, TitleContainer, MenuIconContainer } from "./header.styled"
 import IsoLogo from "./isologo.svg"
 import MenuIcon from "./menu-icon.svg"
+import { AppHeader, TitleContainer, MenuIconContainer } from "./header.styled"
 import Link from 'next/link'
 
 export default ({ title, onOpenMenu }) => (

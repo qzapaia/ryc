@@ -1,7 +1,7 @@
-import styled from "styled-components"
 import LogoTipo from "components/icons/logotipo.svg"
 import LocationIcon from "components/icons/location.svg"
 import cloudinary from "lib/cloudinary"
+import styled from "styled-components"
 
 export const Root = styled.div`
   background-image:url(${cloudinary.secureURL("ryc/R_C_homeBack_2x.jpg")});

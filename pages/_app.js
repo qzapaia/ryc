@@ -1,6 +1,5 @@
 
 import App, { Container } from 'next/app'
-import React from 'react'
 import { ApolloProvider } from 'react-apollo'
 import withApollo from 'lib/withApollo'
 import WithStyled from "../containers/with-styled"
