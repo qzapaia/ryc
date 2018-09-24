@@ -28,6 +28,8 @@ export default class MyDocument extends Document {
 
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="stylesheet" href="/static/fonts/komet/komet.css" />
+          <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.css' rel='stylesheet' />
+          
           {this.props.styleTags}
         </Head>
         <body>

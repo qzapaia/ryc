@@ -1,3 +1,4 @@
+- cambiar background en la home cuando estás logueado
 - chequear "editar perfil" usar PageContent 
 y poner el gris de PageContainer como opcional
 - mix comidas

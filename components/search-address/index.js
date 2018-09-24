@@ -1,15 +1,13 @@
 import { withState, withProps, withHandlers, compose } from "recompose";
-import ReactMapGL from "react-map-gl";
 import { InputDark } from "components/input-text";
 import { resolveAddress } from "lib/geo";
+import {StaticMap} from "components/map"
 
 const defaultMapParams = {
-  width: 400,
   height: 400,
   latitude: 37.7577,
   longitude: -122.4376,
-  zoom: 15,
-  mapboxApiAccessToken: process.env.MAPBOX_ACCESS_TOKEN
+  zoom: 15
 };
 
 let to
@@ -33,7 +31,7 @@ const enhacer = compose(
 const View = ({ address, onAddressChange, mapParams }) => (
   <div>
     <InputDark onChange={onAddressChange} value={address} />
-    <ReactMapGL {...mapParams} />
+    <StaticMap {...mapParams} />
   </div>
 );
 
