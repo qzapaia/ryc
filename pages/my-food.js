@@ -7,7 +7,7 @@ export default () => (
     <Head>
       <title>Rico y Casero</title>  
     </Head>
-    <AppLayout>
+    <AppLayout title="Mis comidas">
       <MyFood />
     </AppLayout>
   </div>

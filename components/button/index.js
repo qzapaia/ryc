@@ -1,4 +1,3 @@
-import styled from "styled-components"
 import {InputButtonBox} from "components/boxes"
 import Color from "color"
 

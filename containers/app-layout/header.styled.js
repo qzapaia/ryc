@@ -9,6 +9,12 @@ export const AppHeader = styled.div`
 `
 export const TitleContainer = styled.div`
   flex:1;
+  color: white;
+  text-align: center;
+  font-size: 21px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `
 export const MenuIconContainer = styled.div`
   display: flex;

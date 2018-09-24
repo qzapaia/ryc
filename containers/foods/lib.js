@@ -3,13 +3,12 @@ import { resolveAddress, getCurrentPosition } from 'lib/geo';
 
 const foodsIndex = algoliaClient.initIndex('ryc_foods');
 
-export const getFoodsNearAddress = async address => {
-    const resGeo = await resolveAddress(address);
-    const geoCoded = await resGeo.json();
+export const getFoodsNearAddress = async addressData => {
+    const geoCoded = await resolveAddress(addressData);
     const firstGeoResult = geoCoded[0];
     const error = firstGeoResult ? null : 'No reconocemos esa dirección';
 
-    console.log('geo address', address);
+    console.log('geo address', addressData.address);
     console.log('geo resolved', firstGeoResult && `${firstGeoResult.lat}, ${firstGeoResult.lon}`);
     console.log('geo error', error);
     

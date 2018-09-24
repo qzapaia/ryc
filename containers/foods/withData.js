@@ -29,7 +29,7 @@ export default class extends Component{
     } = userGeoByIp
 
     const here = near == 'here';
-    const result = here ? await getFoodsNearHere() : await getFoodsNearAddress(`${near}, ${city}, ${country}`);
+    const result = here ? await getFoodsNearHere() : await getFoodsNearAddress({address:near, city, country});
     
     !here && store.set(LAST_ADDRESS, near);
     

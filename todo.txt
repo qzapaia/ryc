@@ -1,3 +1,6 @@
+- chequear "editar perfil" usar PageContent 
+y poner el gris de PageContainer como opcional
+- mix comidas
 - https://www.mapbox.com/
 - https://github.com/mariusandra/pigeon-maps
 - cambiar la frase de la home cuando vuelve de ingresar

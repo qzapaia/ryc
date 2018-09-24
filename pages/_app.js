@@ -2,6 +2,7 @@
 import App, { Container } from 'next/app'
 import { ApolloProvider } from 'react-apollo'
 import withApollo from 'lib/withApollo'
+import withGeoIp from 'lib/withGeoIp'
 import WithStyled from "../containers/with-styled"
 
 class MyApp extends App {
@@ -18,5 +19,7 @@ class MyApp extends App {
     )
   }
 }
+const AppWithGeo = withGeoIp(MyApp)
+const AppWithApollo = withApollo(AppWithGeo)
 
-export default withApollo(MyApp)
+export default AppWithApollo

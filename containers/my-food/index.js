@@ -21,7 +21,7 @@ const View = ({ foods }) => (
     <PageContent>
       <FoodList>
         {foods.map(f => (
-          <FoodCard key={f.id} {...f} />
+          <FoodCard ownerView={true} key={f.id} {...f} />
         ))}
       </FoodList>
     </PageContent>

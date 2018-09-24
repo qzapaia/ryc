@@ -1,13 +1,14 @@
 import { Form } from "./styled";
 import gql from "graphql-tag";
-import { Query, Mutation } from "react-apollo";
+import { Mutation } from "react-apollo";
 import { FieldSet, Label } from "components/fieldset";
 import { InputDark, TextAreaDark } from "components/input-text";
 import { SecondaryButton } from "components/button";
-import { PageContainer } from "components/boxes";
+import { PageContainer, PageContent } from "components/boxes";
 import { withHandlers } from "recompose";
 import WithMe from "containers/with-me";
 import { PageTitle, PageSubTitle } from "components/text";
+import SearchAddress from "components/search-address"
 
 const enhace = withHandlers({
   onSubmit: props => e => {
@@ -21,24 +22,31 @@ const enhace = withHandlers({
 });
 
 const View = enhace(({ subtitle, me, onSubmit }) => (
-  <PageContainer>
-    <PageTitle>Editar perfil</PageTitle>
-    {subtitle && <PageSubTitle>{subtitle}</PageSubTitle>}
-    <Form onSubmit={onSubmit}>
-      <FieldSet>
-        <Label required>Nombre Completo</Label>
-        <InputDark name="fullName" defaultValue={me.fullName} />
-      </FieldSet>
-      
-      <FieldSet>
-        <Label>Algo sobre vos</Label>
-        <TextAreaDark name="bio" defaultValue={me.bio} />
-      </FieldSet>
+  <PageContainer light={true}>
+    <PageContent>
+      <PageTitle>Editar perfil</PageTitle>
+      {subtitle && <PageSubTitle>{subtitle}</PageSubTitle>}
+      <Form onSubmit={onSubmit}>
+        <FieldSet>
+          <Label required>Nombre Completo</Label>
+          <InputDark name="fullName" defaultValue={me.fullName} />
+        </FieldSet>
 
-      <FieldSet>
-        <SecondaryButton>Continuar</SecondaryButton>
-      </FieldSet>
-    </Form>
+        <FieldSet>
+          <Label>Algo sobre vos</Label>
+          <TextAreaDark name="bio" defaultValue={me.bio} />
+        </FieldSet>
+        
+        <FieldSet>
+          <Label>Donde queda tu cocina?</Label>
+          <SearchAddress />
+        </FieldSet>
+
+        <FieldSet>
+          <SecondaryButton>Continuar</SecondaryButton>
+        </FieldSet>
+      </Form>
+    </PageContent>
   </PageContainer>
 ));
 
@@ -54,9 +62,9 @@ export const UPDATE_ME = gql`
 
 const WithUpdateMe = props => (
   <WithMe>
-    {({me, query}) => (
-      <Mutation mutation={UPDATE_ME} refetchQueries={[{query}]}>
-        {(updateUser) => (
+    {({ me, query }) => (
+      <Mutation mutation={UPDATE_ME} refetchQueries={[{ query }]}>
+        {updateUser => (
           <View
             {...props}
             me={me}

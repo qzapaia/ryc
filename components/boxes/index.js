@@ -9,8 +9,10 @@ export const InputButtonBox = styled.button`
 
 export const PageContainer = styled.div`
   padding: 10px;
-  background-color: ${props=>props.theme.colors.grayLight};
+  min-height:100vh;
+  background-color: ${props=>props.light ? 'inherit':  props.theme.colors.grayLight};
 `
+
 export const PageContent = styled.div`
   margin:0 auto;
   max-width:768px;

@@ -65,6 +65,15 @@ export default ({ onLogout, me }) => (
               <MenuItemText>Mis comidas</MenuItemText>
             </MenuItem>
           </Link>
+          
+          <Link href="/my-profile">
+            <MenuItem>
+              <MenuItemIcon>
+                <UserIcon />
+              </MenuItemIcon>
+              <MenuItemText>Mi perfil</MenuItemText>
+            </MenuItem>
+          </Link>
         </div>
       )}
 
