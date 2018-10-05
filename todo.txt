@@ -1,3 +1,12 @@
+- hacer un branch con versión prelimiar, para el buscador:
+"todavía no hay cocineros en esta zona, querés que te avisemos cuando haya?"
+Y para publicar
+"Contanos que te gustaría cocinar y nos pondremos en contacto con vos"
+
+
+- agregar una opcion en el menu general "mis datos" 
+para configurar el nombre y las direcciones de recepcion del usuario
+- cambiar "mi perfil" a "mi zona de envio" y sacar el nombre
 - cambiar background en la home cuando estás logueado
 - chequear "editar perfil" usar PageContent 
 y poner el gris de PageContainer como opcional
