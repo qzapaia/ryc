@@ -38,7 +38,7 @@ export const SentEmail = styled.span`
 
 export const Disclaimer = styled.div`
   font-size: 14px;
-  color:${props=>props.theme.colors.main};
+  color:${props=>props.theme.colors.coral};
   text-align: center;
   margin-top: 40px;
 `

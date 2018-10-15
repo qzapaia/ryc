@@ -1,6 +1,6 @@
 import Head from "next/head";
 import AppLayout from "../containers/app-layout";
-import LoginContainer from "../containers/login/withData";
+import LoginContainer from "containers/login";
 import {pick} from "lodash";
 import Router from 'next/router'
 

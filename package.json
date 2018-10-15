@@ -26,7 +26,7 @@
     "graphql-tag": "^2.9.1",
     "isomorphic-unfetch": "2.0.0",
     "mapbox": "^1.0.0-beta10",
-    "next": "^7.0.0",
+    "next": "^7.0.2",
     "prop-types": "15.6.0",
     "query-string": "^6.0.0",
     "react": "^16.5.2",

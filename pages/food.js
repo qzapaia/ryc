@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import AppLayout from '../containers/app-layout';
-import FoodsContainer from "../containers/foods/withData";
+import FoodsContainer from "containers/foods";
 
 const FoodPage = (props) => (
   <div>

@@ -7,11 +7,11 @@ import {
   StyledLocationIcon,
   SearchByAddressSection,
   SearchByAddressButtonContainer
-} from "./home-search-section.styled"
-import { Button, SecondaryButton } from "components/button"
-import Input from "components/input-text"
+} from "./home-search-section.styled";
+import { Button, SecondaryButton } from "components/button";
+import Input from "components/input-text";
 
-const preventDefault = (next) => (e) => e.preventDefault() || next()
+const preventDefault = next => e => e.preventDefault() || next();
 
 export default ({
   onSearchNearHere,
@@ -20,34 +20,32 @@ export default ({
   address,
   onSearchByAddress
 }) => (
-    <Root>
-      <LogoTipoContainer>
-        <StyledLogoTipo />
-      </LogoTipoContainer>
+  <Root>
+    <LogoTipoContainer>
+      <StyledLogoTipo />
+    </LogoTipoContainer>
 
-      <IntroText>
-        Encontrá los mejores cocineros de tu barrio, del mundo.
+    <IntroText>
+      Encontrá los mejores cocineros de tu barrio, del mundo.
     </IntroText>
 
-      <NearMeSection>
-        <Button onClick={onSearchNearHere} disabled={disableSearch}>
-          <StyledLocationIcon></StyledLocationIcon>
-          Cerca de mi ubicación actual
+    <NearMeSection>
+      <Button onClick={onSearchNearHere} disabled={disableSearch}>
+        <StyledLocationIcon />
+        <span>Cerca de mi ubicación actual</span>
       </Button>
-      </NearMeSection>
+    </NearMeSection>
 
-      <SearchByAddressSection onSubmit={preventDefault(onSearchByAddress)}>
-        <Input
-          placeholder="Rivadavía 7123"
-          onChange={onAddressChange}
-          value={address}
-        />
+    <SearchByAddressSection onSubmit={preventDefault(onSearchByAddress)}>
+      <Input
+        placeholder="Rivadavía 7123"
+        onChange={onAddressChange}
+        value={address}
+      />
 
-        <SearchByAddressButtonContainer>
-          <SecondaryButton>
-            Buscar por dirección
-          </SecondaryButton>
-        </SearchByAddressButtonContainer>
-      </SearchByAddressSection>
-    </Root>
-  )
+      <SearchByAddressButtonContainer>
+        <SecondaryButton>Buscar por dirección</SecondaryButton>
+      </SearchByAddressButtonContainer>
+    </SearchByAddressSection>
+  </Root>
+);

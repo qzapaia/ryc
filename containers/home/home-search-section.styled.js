@@ -33,8 +33,9 @@ export const NearMeSection = styled.div`
   margin: 45px 0 0;
 `
 export const StyledLocationIcon = styled(LocationIcon)`
-  margin-right: 5px;
-  height: 17px;
+  margin: 0 5px 3px 0;
+  height: 20px;
+  width: auto;
 `
 
 export const SearchByAddressSection = styled.form`

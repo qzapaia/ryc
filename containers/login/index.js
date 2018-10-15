@@ -1,98 +1,72 @@
-import {PureComponent } from 'react';
-import autoBind from "react-autobind"
-import {InputDark} from "components/input-text"
-import {SecondaryButton} from "components/button"
-import Link from 'next/link'
-import withControlledProps from "../../lib/withControlledProps"
+import cookie from "cookie"
+import moment from "moment"
+import gql from "graphql-tag";
+import View from "./view";
+import { Mutation, ApolloConsumer } from "react-apollo";
+import { get } from "lodash";
 
-import {
-  Title, 
-  RootContainer, 
-  ButtonContainer,
-  Form,
-  EmailText,
-  Error,
-  SubTitle,
-  Disclaimer,
-  CodeInput,
-  CodeNotReceived
-} from "./styled"
+const SIGNUP_IN = gql`
+  mutation signUpIn($email: String!) {
+    signUpIn(email: $email) {
+      message
+    }
+  }
+`;
+const AUTH = gql`
+  mutation auth($email: String!, $code: String!) {
+    auth(email: $email, code: $code) {
+      token
+    }
+  }
+`;
 
-class Container extends PureComponent {
-  constructor(){
-    super()
-    autoBind(this)
-  }
-  onSubmitEmail(e){
-    e.preventDefault();
-    const { email, onStepChange, onSignUpIn } = this.props;
-    onSignUpIn(email);
-    onStepChange('insertCode')
-  }
-  onSubmitCode(e){
-    e.preventDefault();
-    const { email, code } = this.props;
-    this.props.onAuth(email, code);
-  }
-  render() {
-    const {
-      loginMessage, 
-      authLoading, 
-      authError, 
-      step, 
-      code, 
-      email,
-      onEmailChange,
-      onCodeChange
-    } = this.props;
-    
-    return (step == "insertCode") ? (
-      <RootContainer>
-        <Title>
-          Te enviamos un mail a <EmailText>{email}</EmailText> con un código
-        </Title>
-        <SubTitle>Ingresalo para continuar</SubTitle>
-        <Form onSubmit={this.onSubmitCode}>
-            <CodeInput 
-              type="text"
-              maxlength="6"
-              placeholder="------"
-              onChange={e=>onCodeChange(e.target.value)}
-              value={code}
-              disabled={authLoading}
-            />
-            {authError && <Error>! {authError}</Error>}
-            <ButtonContainer>
-              <SecondaryButton disabled={authLoading}>Ingresar</SecondaryButton>
-            </ButtonContainer>
-            <CodeNotReceived>¿No te llegó? <Link href="/login"><a>Click aquí</a></Link></CodeNotReceived>
-        </Form>
-      </RootContainer>
-    ) : (
-      <RootContainer>
-        <Title>Ingresá solo con tu email</Title>
-        {loginMessage && (
-          <SubTitle>{loginMessage}</SubTitle>
-        )}
-        <Form onSubmit={this.onSubmitEmail}>
-            <InputDark 
-              type="email" 
-              placeholder="yo@gmail.com"
-              onChange={e=>onEmailChange(e.target.value)}
-              value={email}
-              autocomplete="on"
+const onAuthCompleted = (client, props) => data => {
+  const tokenCookie = cookie.serialize('token', data.auth.token, {
+    expires:moment().add("1","year").toDate(),
+    path: "/"
+  });
+  document.cookie = tokenCookie;
+  client.resetStore();
+  props.onAuthCompleted && props.onAuthCompleted();
+};
+
+export default props => (
+  <ApolloConsumer>
+    {client => (
+      <Mutation
+        mutation={AUTH}
+        onCompleted={onAuthCompleted(client, props)}
+      >
+        {(auth, { data, error: authError, loading: authLoading }) => (
+          <Mutation mutation={SIGNUP_IN}>
+            {(signUpIn, { data: signUpInData, loading: signupInLoading }) => (
+              <View
+                {...props}
+                onSignUpIn={email => {
+                  signUpIn({
+                    variables: { email }
+                  });
+                  props.onSignUpIn && props.onSignUpIn(email);
+                }}
+                onAuth={(email, code) =>
+                  auth({
+                    variables: {
+                      email,
+                      code
+                    }
+                  })
+                }
+                authLoading={authLoading}
+                signupInLoading={signupInLoading}
+                authError={get(
+                  authError,
+                  "graphQLErrors.0.functionError.message"
+                )}
               />
-            <ButtonContainer>
-              <SecondaryButton disabled={!email}>Ingresar</SecondaryButton>
-            </ButtonContainer>
-        </Form>
-        <Disclaimer>No importa si es la primera vez</Disclaimer>
-      </RootContainer>
-    )
-  }
-}
-
-const enhace = withControlledProps(['email','step','code'])
-
-
-export default enhace(Container);
+            )}
+          </Mutation>
+        )}
+      </Mutation>
+    )}
+  </ApolloConsumer>
+);

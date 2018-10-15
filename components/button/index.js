@@ -21,8 +21,8 @@ export const SecondaryButton = Button.extend`
   background-color: ${props=>props.theme.colors.aquaDark};
 
   &[disabled]{
-    background-color: ${props=>props.theme.colors.aquaDark};
-    color: ${props=>Color(props.theme.colors.aquaDark).darken(0.3).hsl().string()};
+    background-color: ${props=>props.theme.colors.grayMedium};
+    color: ${props=>props.theme.colors.grayLight};
   }
 `
 

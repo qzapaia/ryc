@@ -1,41 +1,40 @@
-import { PureComponent } from "react";
-import FoodCard from "../../components/food-card";
-import { PageContainer, PageContent } from "components/boxes";
-import {FoodList} from "./styled"
+import { Component } from "react";
+import View from "./view";
+import { getFoodsNearAddress, getFoodsNearHere } from "./lib";
+import store from "store2";
 
-class Container extends PureComponent {
+const LAST_ADDRESS = "last-address";
+
+export default class extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      foods: [],
+      error: null
+    };
+  }
+  async componentDidMount() {
+    const { near, userGeoByIp = {} } = this.props;
+
+    const { city = "", country = "" } = userGeoByIp;
+
+    const here = near == "here";
+    const result = here
+      ? await getFoodsNearHere()
+      : await getFoodsNearAddress({ address: near, city, country });
+
+    !here && store.set(LAST_ADDRESS, near);
+
+    this.setState({
+      foods: result.foods,
+      error: result.error
+    });
+  }
   render() {
-    const { foods, error, near } = this.props;
+    const { foods, error } = this.state;
+    const { near } = this.props;
 
-    return (
-      <PageContainer>
-        <PageContent>
-          <h1>
-            {near == "here"
-              ? "Comidas cerca de aquí"
-              : "Comidas cerca de " + near}
-          </h1>
-          {error ? (
-            <h2>{error}</h2>
-          ) : foods.length ? (
-            <FoodList>
-              {foods.map(food => (
-                  <FoodCard {...food} key={food.id} />
-              ))}
-            </FoodList>
-          ) : (
-            <h3>Buscando ...</h3>
-          )}
-        </PageContent>
-      </PageContainer>
-    );
+    return <View foods={foods} error={error} near={near} />;
   }
 }
-
-Container.propTypes = {};
-
-Container.defaultProps = {
-  foods: []
-};
-
-export default Container;

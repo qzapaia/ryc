@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import PropTypes from "prop-types";
-import LoginContainer from "containers/login/withData";
+import LoginContainer from "containers/login";
 
 export const ME = gql`
   query {

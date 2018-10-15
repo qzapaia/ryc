@@ -35,7 +35,7 @@ export default ({ onLogout, me }) => (
         </MenuSearchItem>
       </Link>
 
-      <Link href="/">
+      <Link href="/orders-requested">
         <MenuItem noBorder>
           <MenuItemIcon>
             <BagIcon />
