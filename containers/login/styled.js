@@ -57,3 +57,8 @@ export const CodeNotReceived = styled.div`
   font-size: 16px;
   margin-top: 20px;
 `
+
+export const CodeNotReceivedLink = styled(CodeNotReceived)`
+  text-decoration: underline;
+  color:${props=>props.theme.colors.coral};
+`.withComponent('span')

@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import { Mutation, Query } from "react-apollo";
 import { SecondaryButton } from "components/button";
 import { Container } from "./styled";
+import {PageTitle} from "components/text"
 import WithMe from "containers/with-me";
 
 const CREATE_FOOD = gql`
@@ -21,7 +22,7 @@ const preventDefaultAnd = next => e => {
 
 const EditBasics = ({ id, onEdit }) => (
   <Container>
-    <h1>{id ? "Editar" : "Publicar"} Comida</h1>
+    <PageTitle>{id ? "Editar" : "Publicar"} Comida</PageTitle>
     <form
       onSubmit={preventDefaultAnd(e =>
         onEdit(id, {

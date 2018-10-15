@@ -27,6 +27,7 @@
     "isomorphic-unfetch": "2.0.0",
     "mapbox": "^1.0.0-beta10",
     "next": "^7.0.2",
+    "node-cache": "^4.2.0",
     "prop-types": "15.6.0",
     "query-string": "^6.0.0",
     "react": "^16.5.2",
@@ -38,7 +39,7 @@
     "react-stars": "^2.2.5",
     "recompose": "^0.27.1",
     "store2": "^2.7.0",
-    "styled-components": "^3.3.3"
+    "styled-components": "^3.4.10"
   },
   "author": "",
   "license": "ISC",

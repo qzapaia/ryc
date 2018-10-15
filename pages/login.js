@@ -17,6 +17,10 @@ const onAuthCompleted = () => {
   Router.push("/?welcome");
 }
 
+const onSendCodeAgain = () => {
+  Router.push("/login");
+}
+
 const LoginPage = (props) => (
   <div>
     <Head>
@@ -26,6 +30,7 @@ const LoginPage = (props) => (
       <LoginContainer 
         onAuthCompleted={onAuthCompleted}
         onSignUpIn={onSignUpIn}
+        onSendCodeAgain={onSendCodeAgain}
         {...props} 
       />
     </AppLayout>
