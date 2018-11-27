@@ -1,14 +1,15 @@
-import { Form } from "./styled";
+import { Form, InputContainer } from "./styled";
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
-import { FieldSet, Label } from "components/fieldset";
+import { FieldSet, Label, SubLabel } from "components/fieldset";
 import { InputDark, TextAreaDark } from "components/input-text";
+import InputSelect from "components/input-select";
 import { SecondaryButton } from "components/button";
 import { PageContainer, PageContent } from "components/boxes";
 import { withHandlers } from "recompose";
 import WithMe from "containers/with-me";
 import { PageTitle, PageSubTitle } from "components/text";
-import SearchAddress from "components/search-address"
+import SearchAddress from "components/search-address";
 
 const enhace = withHandlers({
   onSubmit: props => e => {
@@ -21,10 +22,10 @@ const enhace = withHandlers({
   }
 });
 
-const View = enhace(({ subtitle, me, onSubmit }) => (
+const View = enhace(({ subtitle, me, onSubmit, updating }) => (
   <PageContainer light={true}>
     <PageContent>
-      <PageTitle>Editar perfil</PageTitle>
+      <PageTitle>Editar mi perfil de cocinero</PageTitle>
       {subtitle && <PageSubTitle>{subtitle}</PageSubTitle>}
       <Form onSubmit={onSubmit}>
         <FieldSet>
@@ -36,14 +37,26 @@ const View = enhace(({ subtitle, me, onSubmit }) => (
           <Label>Algo sobre vos</Label>
           <TextAreaDark name="bio" defaultValue={me.bio} />
         </FieldSet>
-        
+
         <FieldSet>
-          <Label>Donde queda tu cocina?</Label>
-          <SearchAddress />
+          <Label>Zona de repartos</Label>
+          <SubLabel>
+            Elegí la zona que más te guste para vender tus comidas. 
+            Recomendamos que sea cerca de tu cocina.
+          </SubLabel>
+          <InputSelect>
+            <option value={1}>1 kilometro alrededor de</option>
+            <option value={2}>2 kilometros alrededor de</option>
+          </InputSelect>
+          <InputContainer>
+            <SearchAddress />
+          </InputContainer>
         </FieldSet>
 
         <FieldSet>
-          <SecondaryButton>Continuar</SecondaryButton>
+          <SecondaryButton disabled={updating}>
+            {updating ? "Guardando ..." : "Continuar"}
+          </SecondaryButton>
         </FieldSet>
       </Form>
     </PageContent>
@@ -63,11 +76,16 @@ export const UPDATE_ME = gql`
 const WithUpdateMe = props => (
   <WithMe>
     {({ me, query }) => (
-      <Mutation mutation={UPDATE_ME} refetchQueries={[{ query }]}>
-        {updateUser => (
+      <Mutation
+        mutation={UPDATE_ME}
+        refetchQueries={[{ query }]}
+        onCompleted={props.onCompleted}
+      >
+        {(updateUser, { loading }) => (
           <View
             {...props}
             me={me}
+            updating={loading}
             onUpdateUser={data =>
               updateUser({
                 variables: {
@@ -82,5 +100,11 @@ const WithUpdateMe = props => (
     )}
   </WithMe>
 );
+
+WithUpdateMe.defaultProps = {
+  onCompleted: (a, b, c) => {
+    console.log(a, b, c);
+  }
+};
 
 export default WithUpdateMe;

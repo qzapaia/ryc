@@ -42,7 +42,7 @@ export const MenuItemText = styled.div`
   font-family: "KometPro";
   font-weight: 300;
 `
-export const LogoutMenuItem = MenuItem.extend`
+export const LogoutMenuItem = styled(MenuItem)`
   border-top:solid 1px #FFFFFF78;
 `
 
@@ -56,7 +56,7 @@ export const GroupTitle = styled.div`
   padding: 9px 0 0 13px;
 `
 
-export const AddMenuItem = MenuItem.extend`
+export const AddMenuItem = styled(MenuItem)`
   border-bottom: none;
   ${MenuItemText}{
     color: ${props => props.theme.colors.aqua};
@@ -67,10 +67,10 @@ export const AddMenuItem = MenuItem.extend`
   }
 `
 
-export const MenuSearchItem = MenuItem.extend`
-  background-color: ${props => props.theme.colors.soft};
+export const MenuSearchItem = styled(MenuItem)`
+  background-color: ${props => props.theme.colors.secondary};
   `
-export const MenuSearchItemText = MenuItemText.extend`
+export const MenuSearchItemText = styled(MenuItemText)`
   margin-left: 15px;
   color: ${props => props.theme.colors.aqua};
   font-size: 14px;

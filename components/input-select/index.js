@@ -1,4 +1,13 @@
-import styled from "styled-components"
-import {InputButtonBox} from "components/boxes"
+import styled from "styled-components";
+import { InputButtonBox } from "components/boxes";
 
-export default InputButtonBox.withComponent("select").extend``
+const InputSelect = styled(InputButtonBox)`
+  -webkit-appearance: none;
+  background-color: ${props => props.theme.colors.grayLight};
+`;
+
+InputSelect.defaultProps = {
+  as: "select"
+};
+
+export default InputSelect;

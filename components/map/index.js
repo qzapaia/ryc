@@ -1,7 +1,13 @@
-import ReactMapGL, { StaticMap as MBStaticMap } from "react-map-gl";
+import ReactMapGL, {
+  StaticMap as MBStaticMap,
+  Marker as MBMarker
+} from "react-map-gl";
+// dimensions es para que el mapa ocupe todo el espacio
 import Dimensions from "react-dimensions";
-import {pure} from "recompose"
 
+import { pure } from "recompose";
+import LocationIcon from "components/icons/location.svg"
+import styled from "styled-components"
 
 export const DefaultMapComp = props => (
   <ReactMapGL
@@ -12,10 +18,40 @@ export const DefaultMapComp = props => (
 );
 export const StaticMapComp = props => (
   <MBStaticMap
+    mapStyle='mapbox://styles/mapbox/streets-v9'
     {...props}
     width={props.containerWidth}
     mapboxApiAccessToken={process.env.MAPBOX_ACCESS_TOKEN}
   />
+);
+
+const StyledLocationIcon = styled(LocationIcon)`
+  height:30px;
+  width:30px;
+  *{
+    fill:${props=>props.theme.colors.coral};
+  }
+`
+
+export const StyledMarker = (props) => (
+  <MBMarker {...props}>
+    <StyledLocationIcon />
+  </MBMarker>
+);
+
+const Circle = styled.div`
+  height:300px;
+  width:300px;
+  border-radius:50%;
+  margin:-50% 0 0 -50%;
+  opacity:.3;
+  background-color:${props=>props.theme.colors.coral};
+`
+
+export const ZoneMarker = (props) => (
+  <MBMarker {...props}>
+    <Circle />
+  </MBMarker>
 );
 
 // los wrapeo en pure porque Dimensions no es amigo de los function components

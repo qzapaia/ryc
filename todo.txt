@@ -1,9 +1,12 @@
+- prefetch resultado de búsqueda
+- usar docz para la docu de los componentes
+- usar formik para los fomularios
 - hacer un branch con versión prelimiar, para el buscador:
 "todavía no hay cocineros en esta zona, querés que te avisemos cuando haya?"
 Y para publicar
 "Contanos que te gustaría cocinar y nos pondremos en contacto con vos"
 
-
+- cachear fonts con https://developers.google.com/web/tools/workbox/
 - agregar una opcion en el menu general "mis datos" 
 para configurar el nombre y las direcciones de recepcion del usuario
 - cambiar "mi perfil" a "mi zona de envio" y sacar el nombre
@@ -30,3 +33,7 @@ Buscador
 - la aclaración al pedir un plato es el primer mensaje de la charla
 
 - usar mapas de mapbox
+- conversational interface
+- tensorflow
+- desktop PWA cuando sea posible
+  https://medium.com/dailyjs/goodbye-electron-hello-desktop-pwas-f316b8f39882

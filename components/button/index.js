@@ -1,33 +1,37 @@
-import {InputButtonBox} from "components/boxes"
-import Color from "color"
+import styled from "styled-components"
+import { InputButtonBox } from "components/boxes";
 
-export const Button = InputButtonBox.withComponent("button").extend`
+export const Button = styled(InputButtonBox)`
   background-color: initial;
   border: initial;
-  background-color:${props=>props.theme.colors[props.type || "main"]};
+  background-color: ${props => props.theme.colors[props.type || "main"]};
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor:pointer;
-  
-  &[disabled]{
-    background-color: ${props=>props.theme.colors.secondary};
-    color: ${props=>props.theme.colors[props.type || "main"]};
+  cursor: pointer;
+
+  &[disabled] {
+    background-color: ${props => props.theme.colors.secondary};
+    color: ${props => props.theme.colors[props.type || "main"]};
   }
-`
+`;
 
-export const SecondaryButton = Button.extend`
-  background-color: ${props=>props.theme.colors.aquaDark};
+Button.defaultProps = {
+  as: "button"
+};
 
-  &[disabled]{
-    background-color: ${props=>props.theme.colors.grayMedium};
-    color: ${props=>props.theme.colors.grayLight};
+export const SecondaryButton = styled(Button)`
+  background-color: ${props => props.theme.colors.aquaDark};
+
+  &[disabled] {
+    background-color: ${props => props.theme.colors.grayMedium};
+    color: ${props => props.theme.colors.grayLight};
   }
-`
+`;
 
-export const AuxButton = Button.extend`
-  background-color: ${props=>props.theme.colors.gray};
-`
+export const AuxButton = styled(Button)`
+  background-color: ${props => props.theme.colors.gray};
+`;
 
-export default Button
+export default Button;

@@ -15,16 +15,17 @@ export default class extends Component {
     };
   }
   async componentDidMount() {
-    const { near, userGeoByIp = {} } = this.props;
+    const { near:address, userGeoByIp = {} } = this.props;
 
     const { city = "", country = "" } = userGeoByIp;
+    
+    const nearHere = address == "here";
 
-    const here = near == "here";
-    const result = here
+    const result = nearHere
       ? await getFoodsNearHere()
-      : await getFoodsNearAddress({ address: near, city, country });
+      : await getFoodsNearAddress({ address, city, country });
 
-    !here && store.set(LAST_ADDRESS, near);
+    !nearHere && store.set(LAST_ADDRESS, address);
 
     this.setState({
       foods: result.foods,

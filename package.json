@@ -2,15 +2,16 @@
   "name": "ricoycasero",
   "version": "0.0.1",
   "scripts": {
-    "dev": "next -p 8793",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start -p $PORT",
+    "start": "NODE_ENV=production node server.js",
     "heroku-postbuild": "npm run build"
   },
   "browser": {
     "geoip-lite": false
   },
   "dependencies": {
+    "@google/maps": "^0.5.5",
     "algoliasearch": "^3.25.1",
     "apollo-boost": "^0.1.4",
     "apollo-client-preset": "1.0.4",
@@ -27,6 +28,7 @@
     "isomorphic-unfetch": "2.0.0",
     "mapbox": "^1.0.0-beta10",
     "next": "^7.0.2",
+    "next-offline": "^3.2.1",
     "node-cache": "^4.2.0",
     "prop-types": "15.6.0",
     "query-string": "^6.0.0",
@@ -39,7 +41,7 @@
     "react-stars": "^2.2.5",
     "recompose": "^0.27.1",
     "store2": "^2.7.0",
-    "styled-components": "^3.4.10"
+    "styled-components": "^4.1.1"
   },
   "author": "",
   "license": "ISC",

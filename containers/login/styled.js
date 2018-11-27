@@ -42,7 +42,7 @@ export const Disclaimer = styled.div`
   text-align: center;
   margin-top: 40px;
 `
-export const Error = Disclaimer.extend`
+export const Error = styled(Disclaimer)`
   color:${props=>props.theme.colors.coral};
   margin-top: 10px;
 `

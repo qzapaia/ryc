@@ -4,15 +4,6 @@ import LoginContainer from "containers/login";
 import {pick} from "lodash";
 import Router from 'next/router'
 
-const onSignUpIn = email => {
-  Router.push({
-    pathname: '/login',
-    query: { 
-      email,
-      step: 'insertCode'
-    }
-  })
-}
 const onAuthCompleted = () => {
   Router.push("/?welcome");
 }
@@ -29,7 +20,6 @@ const LoginPage = (props) => (
     <AppLayout>
       <LoginContainer 
         onAuthCompleted={onAuthCompleted}
-        onSignUpIn={onSignUpIn}
         onSendCodeAgain={onSendCodeAgain}
         {...props} 
       />

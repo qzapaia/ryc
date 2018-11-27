@@ -1,12 +1,13 @@
-import { injectGlobal } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
-injectGlobal`
+export const GlobalStyle = createGlobalStyle`
   *{
     box-sizing:border-box;
   }
 
   body, input, button, textarea {
     font-family: "KometPro", Arial;
+    color: ${props=>props.theme.colors.gray};
     margin: 0;
     outline:none;
     border: none;

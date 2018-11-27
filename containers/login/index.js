@@ -6,6 +6,7 @@ import { Mutation, ApolloConsumer } from "react-apollo";
 import { get } from "lodash";
 import cache from "lib/cache";
 import { withHandlers, withProps, withState, compose } from "recompose";
+import { withRouter } from "next/router";
 
 const SENT_CODE = "sentCode";
 
@@ -92,11 +93,13 @@ const enhace = compose(
   }),
   withHandlers({
     onSignUpIn: props => email => {
+      props.router.prefetch("/");
       cache.set(SENT_CODE, email, 60);
       props.setRandom(12)
     },
     onAuthCompleted: props => () => {
       cache.del(SENT_CODE);
+      props.onAuthCompleted();
     },
     onSendCodeAgain: props => () => {
       cache.del(SENT_CODE);
@@ -106,4 +109,4 @@ const enhace = compose(
   })
 );
 
-export default enhace(Login);
+export default withRouter(enhace(Login));
