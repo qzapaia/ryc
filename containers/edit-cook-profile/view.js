@@ -8,14 +8,19 @@ import SearchAddress from "components/search-address";
 import { Form, InputContainer, DeliveryZoneSubtitle } from "./styled";
 import { withHandlers, compose } from "recompose";
 import { Formik } from "formik";
-import { keys } from "lodash";
+import { keys, defaults } from "lodash";
 
 export const View = ({ subtitle, me, onSubmit }) => (
   <PageContainer light={true}>
     <PageContent>
       <PageTitle>Mi perfil de cocinero</PageTitle>
       {subtitle && <PageSubTitle>{subtitle}</PageSubTitle>}
-      <Formik initialValues={me} onSubmit={onSubmit}>
+      <Formik
+        initialValues={defaults(me, {
+          deliveryRadiusInMeters: 1000
+        })}
+        onSubmit={onSubmit}
+      >
         {({
           setFieldTouched,
           setFieldValue,
@@ -66,7 +71,7 @@ export const View = ({ subtitle, me, onSubmit }) => (
                 name="deliveryRadiusInMeters"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.deliveryRadiusInMeters || 1000}
+                value={values.deliveryRadiusInMeters}
               >
                 <option value={1000}>1 kilometro alrededor de</option>
                 <option value={2000}>2 kilometros alrededor de</option>

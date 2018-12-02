@@ -57,7 +57,7 @@ class Container extends PureComponent {
         <Form onSubmit={this.onSubmitCode}>
           <CodeInput
             type="text"
-            maxlength="6"
+            maxLength="6"
             placeholder="------"
             onChange={e => onCodeChange(e.target.value)}
             value={code}
