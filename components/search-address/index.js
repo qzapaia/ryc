@@ -5,7 +5,7 @@ import { StaticMap, PointMarker } from "components/map";
 import { InputContainer, MapPlaceHolder } from "./styled";
 
 const defaultMapParams = {
-  zoom: 16
+  zoom: 14
 };
 
 let to;
