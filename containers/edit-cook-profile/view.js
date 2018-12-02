@@ -66,7 +66,7 @@ export const View = ({ subtitle, me, onSubmit }) => (
                 name="deliveryRadiusInMeters"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.deliveryRadiusInMeters}
+                value={values.deliveryRadiusInMeters || 1000}
               >
                 <option value={1000}>1 kilometro alrededor de</option>
                 <option value={2000}>2 kilometros alrededor de</option>

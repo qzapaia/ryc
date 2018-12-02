@@ -54,7 +54,7 @@ const View = ({ value, onBlur, onAddressChange, name }) => {
           autoComplete="off"
         />
       </InputContainer>
-      {location ? (
+      {value.location ? (
         <StaticMap {...defaultMapParams} {...value.location}>
           <PointMarker {...value.location}>
             <div>Hi There</div>

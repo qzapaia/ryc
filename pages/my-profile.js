@@ -1,7 +1,9 @@
 import Head from 'next/head'
 import AppLayout from '../containers/app-layout';
 import dynamic from 'next/dynamic'
-const EditCookProfile = dynamic(import("containers/edit-cook-profile"))
+const EditCookProfile = dynamic(import("containers/edit-cook-profile"),{
+  ssr: false
+})
 
 export default () => (
   <div>
