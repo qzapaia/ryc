@@ -103,14 +103,16 @@ export const View = ({ subtitle, me, onSubmit }) => (
 
 const enhace = withHandlers({
   onSubmit: props => (values, { setStatus, setSubmitting }) => {
-    console.log(values)
-    props.onUpdateUser({
-      ...values,
-      deliveryRadiusInMeters: parseInt(values.deliveryRadiusInMeters)
-    }).then(() => {
-      setSubmitting(false);
-      setStatus("completed");
-    });
+    // console.log(values);
+    props
+      .onUpdateUser({
+        ...values,
+        deliveryRadiusInMeters: parseInt(values.deliveryRadiusInMeters)
+      })
+      .then(() => {
+        setSubmitting(false);
+        setStatus("completed");
+      });
   }
 });
 

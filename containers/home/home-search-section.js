@@ -40,7 +40,7 @@ export default ({
       <Input
         placeholder="Rivadavía 7123"
         onChange={onAddressChange}
-        value={address}
+        value={address || ""}
       />
 
       <SearchByAddressButtonContainer>

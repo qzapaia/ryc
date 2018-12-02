@@ -17,24 +17,18 @@ const enhacer = compose(
       const { onChange, value } = props;
       const address = event.target.value;
 
-      clearTimeout(to);
       onChange({
         ...value,
         address
       });
-
+      
+      clearTimeout(to);
       to = setTimeout(() => {
         geoCode(address).then(results => {
-          const first = results[0]
-          if (first) {
-            onChange({
-              address,
-              location:{
-                latitude: first.geometry.location.lat,
-                longitude: first.geometry.location.lng
-              }
-            })
-          }
+          onChange({
+            address,
+            location: results[0] || null
+          });
         });
       }, 800);
     }
