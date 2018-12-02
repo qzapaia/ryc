@@ -9,6 +9,7 @@ export const ME = gql`
       id
       fullName
       bio
+      deliveryCenterAddress
       deliveryCenterLocation
       deliveryRadiusInMeters
     }

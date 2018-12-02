@@ -19,6 +19,7 @@ export const DefaultMapComp = props => (
 export const StaticMapComp = props => (
   <MBStaticMap
     mapStyle='mapbox://styles/mapbox/streets-v9'
+    height={375}
     {...props}
     width={props.containerWidth}
     mapboxApiAccessToken={process.env.MAPBOX_ACCESS_TOKEN}
@@ -48,9 +49,20 @@ const Circle = styled.div`
   background-color:${props=>props.theme.colors.coral};
 `
 
+const LittleCircle = styled(Circle)`
+  width: 40px;
+  height: 40px;
+`
+
 export const ZoneMarker = (props) => (
   <MBMarker {...props}>
     <Circle />
+  </MBMarker>
+);
+
+export const PointMarker = (props) => (
+  <MBMarker {...props}>
+    <LittleCircle />
   </MBMarker>
 );
 

@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
 
 const move = keyframes`
   to {
@@ -24,7 +24,7 @@ export const MenuContainer = styled.div`
 
 export const MenuAnimation = styled.div`
   transform: translateX(-100%);
-  ${props => props.show && `
+  ${props => props.show && css`
     animation: ${move} .1s linear forwards;
   `}
 `
