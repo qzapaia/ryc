@@ -16,9 +16,10 @@ export const View = ({ subtitle, me, onSubmit }) => (
       <PageTitle>Mi perfil de cocinero</PageTitle>
       {subtitle && <PageSubTitle>{subtitle}</PageSubTitle>}
       <Formik
-        initialValues={defaults(me, {
-          deliveryRadiusInMeters: 1000
-        })}
+        initialValues={{
+          ...me,
+          deliveryRadiusInMeters: me.deliveryRadiusInMeters || 1000
+        }}
         onSubmit={onSubmit}
       >
         {({
