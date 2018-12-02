@@ -56,7 +56,7 @@ export const View = ({ subtitle, me, onSubmit }) => (
               />
             </FieldSet>
 
-            <FieldSet>
+            <FieldSet as="div">
               <Label>Zona de repartos</Label>
               <DeliveryZoneSubtitle>
                 Elegí la zona que más te guste para vender tus comidas.

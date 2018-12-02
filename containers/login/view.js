@@ -85,7 +85,7 @@ class Container extends PureComponent {
             placeholder="yo@gmail.com"
             onChange={e => onEmailChange(e.target.value)}
             value={email}
-            autocomplete="on"
+            autoComplete="on"
           />
           <ButtonContainer>
             <SecondaryButton disabled={!email}>Ingresar</SecondaryButton>

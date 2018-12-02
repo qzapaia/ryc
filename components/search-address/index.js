@@ -43,7 +43,7 @@ const enhacer = compose(
 
 const View = ({ value, onBlur, onAddressChange, name }) => {
   return (
-    <div>
+    <label>
       <InputContainer>
         <InputDarkFullWidth
           placeholder="Ej: Cabildo 500"
@@ -63,7 +63,7 @@ const View = ({ value, onBlur, onAddressChange, name }) => {
       ) : (
         <MapPlaceHolder />
       )}
-    </div>
+    </label>
   );
 };
 
